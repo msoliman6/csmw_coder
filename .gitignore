@@ -9,3 +9,4 @@ mlruns/
 monitor.db
 .web/
 prefs.json
+.DS_Store
