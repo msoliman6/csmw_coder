@@ -40,8 +40,7 @@
 
 ## Workflow
 
-The block diagram of this workflow, generated from its definition (`just figure`): what each stage
-does, who writes and who attacks, where code freezes, merges and runs.
+What each stage does, who writes and who attacks, where code freezes, merges and runs.
 
 <p align="center"><picture>
 <source media="(prefers-color-scheme: dark)" srcset="docs/media/workflow-dark.svg">
