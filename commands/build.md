@@ -2,17 +2,16 @@
 name: build
 description: Build a Python module on the side. Turns this conversation's request into a task and starts a run that continues without you; prints one line and stops.
 argument-hint: "[what to build, in one paragraph, if not already said]"
-allowed-tools: Read, Write, Bash
+allowed-tools: Read, Bash
 ---
 
 Start a code-builder run from what this conversation has established. The run is a separate
 process that continues after you answer; you never wait for it, poll it, read its folder, or
 report on it. Your whole answer is one line.
 
-1. Write the task. Read `${CLAUDE_PLUGIN_ROOT}/plugin/defaults.json` (the settings), take the
+1. Compose the task. Read `${CLAUDE_PLUGIN_ROOT}/plugin/defaults.json` (the settings), take the
    shape from `${CLAUDE_PLUGIN_ROOT}/plugin/task.schema.json` and the wording from
-   `${CLAUDE_PLUGIN_ROOT}/plugin/task.example.json`, then write
-   `${CLAUDE_PLUGIN_DATA}/tasks/<module>.json` with:
+   `${CLAUDE_PLUGIN_ROOT}/plugin/task.example.json`, and compose one JSON object with:
    - `task_id`: the module name (letters, digits, underscores).
    - `objective`: one sentence.
    - `inputs.brief`: `request` (one paragraph, the user's words where they gave them), `context`
@@ -24,9 +23,11 @@ report on it. Your whole answer is one line.
    Fill every field from the conversation and the current project; invent nothing. If the request
    itself is missing, ask for it in one sentence and stop. Do not ask about anything else.
 
-2. Start it:
+2. Start it, handing the JSON to the script on stdin (write no file yourself):
    ```bash
-   "${CLAUDE_PLUGIN_ROOT}/scripts/start.sh" "${CLAUDE_PLUGIN_DATA}/tasks/<module>.json"
+   "${CLAUDE_PLUGIN_ROOT}/scripts/start.sh" - <<'TASK'
+   { ...the JSON object... }
+   TASK
    ```
 
 3. Answer with the single line the script printed, verbatim, and nothing more. No summary of the

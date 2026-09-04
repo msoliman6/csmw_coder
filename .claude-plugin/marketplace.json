@@ -5,7 +5,7 @@
       "name": "csmw-coder",
       "displayName": "csmw coder",
       "description": "Build a Python module on the side with two model sides of different vendors, code deciding every step.",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "source": "./",
       "homepage": "https://github.com/msoliman6/csmw_coder",
       "author": {

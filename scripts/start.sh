@@ -2,9 +2,13 @@
 # Start one run from a task.json, detached, and print exactly one line. The session that asked
 # never sees the run's output: it goes to the run dir and the page.
 source "$(dirname "${BASH_SOURCE[0]}")/env.sh"
-TASK="${1:?usage: start.sh task.json}"
+TASK="${1:?usage: start.sh task.json | start.sh - < task.json}"
 [ -x "$VENV/bin/csmw" ] || "$PLUGIN_ROOT/scripts/bootstrap.sh" >/dev/null || { echo "refused: bootstrap failed, see $DATA/bootstrap.log"; exit 1; }
-NAME="$("$VENV/bin/python" -c "import json,sys;print(json.load(open(sys.argv[1]))['task_id'])" "$TASK")"
+if [ "$TASK" = "-" ]; then  # the task on stdin: the caller never has to write a file
+  TASK="$DATA/tasks/stdin-$$.json"; cat > "$TASK"
+fi
+NAME="$("$VENV/bin/python" -c "import json,sys;print(json.load(open(sys.argv[1]))['task_id'])" "$TASK" 2>/dev/null)" || { echo "refused: the task is not JSON with a task_id"; exit 2; }
+[ "$TASK" = "$DATA/tasks/stdin-$$.json" ] && mv "$TASK" "$DATA/tasks/$NAME.json" && TASK="$DATA/tasks/$NAME.json"
 RUN="$RUNS/$NAME"; n=2
 while [ -f "$RUN/state.json" ]; do RUN="$RUNS/$NAME-$n"; n=$((n+1)); done
 mkdir -p "$RUN"
