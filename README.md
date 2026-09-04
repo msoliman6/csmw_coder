@@ -233,6 +233,10 @@ just dash             # the page at http://127.0.0.1:3007
 The example task (`examples/code_builder/task.json`) builds a slug library. Runs live under
 `runs/` and are never committed.
 
+**Cost.** The page prices a run's tokens on read: `prices.json` maps a model id to its price in US
+dollars per million tokens, input first, output second. A model missing from the file shows `$?`
+until you add it. Cached input is billed as input, so the estimate rounds up, never down.
+
 ## Origins
 
 - [claudex-loop](https://github.com/chaseai-yt/claudex-loop): Claude Code paired with OpenAI Codex as an adversarial reviewer inside a Claude Code plugin, the pairing this repo is built around.
