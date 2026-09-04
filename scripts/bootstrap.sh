@@ -15,7 +15,7 @@ LOG="$DATA/bootstrap.log"
     HARNESS="$DATA/harness"
   fi
   if [ ! -x "$VENV/bin/python" ]; then  # a checkout with a venv already? reuse it: the plugin root, or the marketplace's directory
-    for cand in "$PLUGIN_ROOT/.venv" "$(python3 -c "import json,os;m=json.load(open(os.path.expanduser('~/.claude/plugins/known_marketplaces.json')));print((m.get('marketplaces',m).get('csmw') or {}).get('installLocation',''))" 2>/dev/null)/.venv"; do
+    for cand in "$(python3 -c "import json,os;m=json.load(open(os.path.expanduser('~/.claude/plugins/known_marketplaces.json')));print((m.get('marketplaces',m).get('csmw') or {}).get('installLocation',''))" 2>/dev/null)/.venv" "$PLUGIN_ROOT/.venv"; do
       [ -x "$cand/bin/csmw" ] && ln -s "$cand" "$VENV" && break
     done
   fi
