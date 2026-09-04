@@ -1,0 +1,36 @@
+{
+  "rows": [
+    {
+      "id": "T-0001",
+      "kind": "B",
+      "owner": "author",
+      "produces": "the core module",
+      "writes": [
+        "src/slug.py"
+      ],
+      "covers": [
+        "C-0004"
+      ],
+      "depends": [],
+      "done_when": "compiles, lints, names every A- step, passes the properties",
+      "status": "todo"
+    },
+    {
+      "id": "T-0002",
+      "kind": "T",
+      "owner": "checker",
+      "produces": "the core tests",
+      "writes": [
+        "tests/test_slug.py"
+      ],
+      "covers": [
+        "P-0004",
+        "P-0005",
+        "P-0006"
+      ],
+      "depends": [],
+      "done_when": "one test per property, every test fails against the null",
+      "status": "todo"
+    }
+  ]
+}

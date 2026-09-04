@@ -1,0 +1,190 @@
+{
+  "id": "ledger.r1",
+  "name": "ledger",
+  "round": 1,
+  "kind": "input",
+  "title": "Confirm the assumptions, by exception",
+  "questions": [
+    {
+      "id": "Q-0001",
+      "text": "Public API is a function named `slugify` with signature `slugify(text: str) -> str` (basis: brief (surface: one function, slugify(text: str) -> str); if wrong: Function API does not match specification; import and calling convention breaks)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0002",
+      "text": "Module is named `slug` (basis: brief (module: slug); if wrong: Module is not importable with the expected name)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0003",
+      "text": "No third-party packages; implementation uses only Python standard library (basis: brief (no dependencies, no third-party packages); if wrong: Installation requires external packages, breaking the standalone requirement)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0004",
+      "text": "Code targets Python 3.11 (basis: brief (constraints: python 3.11); if wrong: Code uses features unavailable in Python 3.11)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0005",
+      "text": "Passing None as text parameter raises TypeError (basis: brief (must_be_true: None raises TypeError); if wrong: TypeError is not raised for None input, violating must-be-true constraint)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0006",
+      "text": "Output slug contains only lowercase ASCII letters (a-z), digits (0-9), and hyphens (-) (basis: brief (must_be_true: only a-z, 0-9 and '-' appear in a slug); if wrong: Output contains prohibited characters)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0007",
+      "text": "The relative order of words from the input is preserved in the output (basis: brief (must_be_true: words keep their order); if wrong: Output reorders or loses words from input)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0008",
+      "text": "Non-ASCII characters are removed entirely, not transliterated to ASCII equivalents (basis: brief (out_of_scope: transliteration of non-ascii letters; implies removal instead); if wrong: Non-ASCII characters are transliterated (e.g., é → e) rather than removed)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0009",
+      "text": "How should word boundaries be detected? Should spaces, punctuation marks, underscores, and transitions in camelCase all act as word separators? (decides: Whether 'hello_world', 'hello-world', 'HelloWorld', and 'hello world' are processed into the same slug or different ones)",
+      "kind": "text",
+      "options": [],
+      "default": "",
+      "recommended": null,
+      "risky": true,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0010",
+      "text": "When multiple consecutive separators (spaces, punctuation, or mixed) appear between words, should they collapse into a single hyphen in the output? (decides: Whether 'hello  world' becomes 'hello-world' or 'hello--world')",
+      "kind": "text",
+      "options": [],
+      "default": "",
+      "recommended": null,
+      "risky": true,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0011",
+      "text": "Should leading and trailing hyphens be removed from the final output slug? (decides: Whether inputs like '-hello' or 'world-' produce leading/trailing hyphens in the output or are stripped clean)",
+      "kind": "text",
+      "options": [],
+      "default": "",
+      "recommended": null,
+      "risky": true,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0012",
+      "text": "What should `slugify('')` return when given an empty string? (decides: Edge case behavior; whether empty input produces empty output or default value)",
+      "kind": "text",
+      "options": [],
+      "default": "",
+      "recommended": null,
+      "risky": true,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0013",
+      "text": "What should happen when the input contains only special characters with no alphanumeric content, such as `slugify('!!!')`? (decides: Whether such inputs return an empty string or raise an exception)",
+      "kind": "text",
+      "options": [],
+      "default": "",
+      "recommended": null,
+      "risky": true,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0014",
+      "text": "Should only None raise TypeError when passed to `slugify()`, or should all non-string types (int, list, dict, etc.) also raise TypeError? (decides: Whether type checking is strict for all non-string inputs or lenient except for None)",
+      "kind": "text",
+      "options": [],
+      "default": "",
+      "recommended": null,
+      "risky": true,
+      "cites": [],
+      "gloss": ""
+    }
+  ],
+  "carried": [],
+  "can_revise": false,
+  "at": "2026-09-04T03:08:11.228096Z"
+}

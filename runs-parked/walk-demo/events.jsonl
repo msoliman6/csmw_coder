@@ -1,0 +1,15 @@
+{"seq":1,"ts":"2026-09-03T23:02:00.560236Z","run_id":"slug-demo","kind":"run.status","step":null,"role":null,"attempt":null,"data":{"status":"RUNNING","outcome":null}}
+{"seq":2,"ts":"2026-09-03T23:02:00.560724Z","run_id":"slug-demo","kind":"step.issued","step":"p0-brief","role":null,"attempt":null,"data":{"step_kind":"code","phase":"0"}}
+{"seq":3,"ts":"2026-09-03T23:02:00.561222Z","run_id":"slug-demo","kind":"step.started","step":"p0-brief","role":null,"attempt":1,"data":{}}
+{"seq":4,"ts":"2026-09-03T23:02:00.562027Z","run_id":"slug-demo","kind":"step.done","step":"p0-brief","role":null,"attempt":null,"data":{"deliverables":["artifacts/brief/v001.json"]}}
+{"seq":5,"ts":"2026-09-03T23:02:00.562273Z","run_id":"slug-demo","kind":"step.issued","step":"p0-ledger","role":null,"attempt":null,"data":{"step_kind":"author","phase":"0"}}
+{"seq":6,"ts":"2026-09-03T23:02:00.562740Z","run_id":"slug-demo","kind":"step.started","step":"p0-ledger","role":null,"attempt":1,"data":{}}
+{"seq":7,"ts":"2026-09-03T23:02:00.564420Z","run_id":"slug-demo","kind":"call.started","step":"p0-ledger","role":"author","attempt":1,"data":{"model":"claude-sonnet-5","schema":"AssumptionsLedger","tools":[],"prompt_sha":"5fdefd88c9da","template_hash":"ba5909037a68","rendered_keys":["brief"]}}
+{"seq":8,"ts":"2026-09-03T23:02:00.564551Z","run_id":"slug-demo","kind":"call.usage","step":"p0-ledger","role":"author","attempt":1,"data":{"input_tokens":305,"output_tokens":83,"cache_read_tokens":0,"turns":1,"tool_calls":0}}
+{"seq":9,"ts":"2026-09-03T23:02:00.564650Z","run_id":"slug-demo","kind":"call.final","step":"p0-ledger","role":"author","attempt":1,"data":{"tokens":388,"model_used":"claude-sonnet-5"}}
+{"seq":10,"ts":"2026-09-03T23:02:00.564732Z","run_id":"slug-demo","kind":"check.result","step":"p0-ledger","role":"author","attempt":1,"data":{"problems":[]}}
+{"seq":11,"ts":"2026-09-03T23:02:00.565024Z","run_id":"slug-demo","kind":"artifact.written","step":"p0-ledger","role":null,"attempt":null,"data":{"path":"artifacts/ledger/v001.json"}}
+{"seq":12,"ts":"2026-09-03T23:02:00.565468Z","run_id":"slug-demo","kind":"step.done","step":"p0-ledger","role":null,"attempt":null,"data":{"deliverables":["artifacts/ledger/v001.json"]}}
+{"seq":13,"ts":"2026-09-03T23:02:00.565777Z","run_id":"slug-demo","kind":"step.issued","step":"p0-gate-ledger","role":null,"attempt":null,"data":{"step_kind":"gate","phase":"0"}}
+{"seq":14,"ts":"2026-09-03T23:02:00.566247Z","run_id":"slug-demo","kind":"step.started","step":"p0-gate-ledger","role":null,"attempt":1,"data":{}}
+{"seq":15,"ts":"2026-09-03T23:02:00.566595Z","run_id":"slug-demo","kind":"gate.asked","step":"p0-gate-ledger","role":null,"attempt":null,"data":{"gate":"ledger.r1","kind":"input","title":"Confirm the assumptions, by exception","questions":2,"carried":0,"needs_human":true}}

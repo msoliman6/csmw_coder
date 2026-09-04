@@ -1,0 +1,163 @@
+{
+  "block": "core",
+  "vocabulary": [
+    {
+      "id": "C-0001",
+      "key": "term_slug",
+      "term": "slug",
+      "definition": "A URL-safe string containing only lowercase ASCII letters (a-z), digits (0-9), and hyphens (-)"
+    }
+  ],
+  "input": [
+    {
+      "id": "C-0002",
+      "key": "input_text",
+      "name": "text",
+      "type": "str",
+      "tags": [
+        "required"
+      ]
+    }
+  ],
+  "output": [
+    {
+      "id": "C-0003",
+      "key": "output_slug",
+      "name": "slug",
+      "type": "str",
+      "tags": [
+        "ascii-only",
+        "lowercase"
+      ]
+    }
+  ],
+  "units": [
+    {
+      "id": "C-0004",
+      "key": "unit_slugify",
+      "name": "slugify",
+      "kind": "function",
+      "params": [
+        {
+          "name": "text",
+          "type": "str",
+          "default": null
+        }
+      ],
+      "returns": "str",
+      "holds": "Returns a URL-safe slug containing only lowercase ASCII letters, digits, and hyphens"
+    }
+  ],
+  "constants": [
+    {
+      "id": "C-0005",
+      "key": "const_valid_characters",
+      "name": "valid_characters",
+      "value": "a-z, 0-9, -",
+      "tag": "format"
+    }
+  ],
+  "invariants": [
+    {
+      "id": "C-0006",
+      "key": "inv_valid_characters_only",
+      "claim": "Output contains only lowercase ASCII letters (a-z), digits (0-9), and hyphens (-)",
+      "measurement": ""
+    },
+    {
+      "id": "C-0007",
+      "key": "inv_order_preserved",
+      "claim": "Alphanumeric content from input appears in the output in the same relative order",
+      "measurement": ""
+    }
+  ],
+  "negative": [
+    {
+      "id": "C-0008",
+      "key": "neg_no_uppercase",
+      "must_not": "Output contain any uppercase letters"
+    },
+    {
+      "id": "C-0009",
+      "key": "neg_no_transliteration",
+      "must_not": "Non-ASCII characters be transliterated to ASCII equivalents; they must be removed instead"
+    }
+  ],
+  "failure": [
+    {
+      "id": "C-0010",
+      "key": "fail_type_error",
+      "on": "text parameter is not a string (including None)",
+      "policy": "raise TypeError",
+      "observable": "TypeError is raised when non-string input is passed to slugify()"
+    }
+  ],
+  "tolerances": [],
+  "algorithm": [
+    {
+      "unit": "unit_slugify",
+      "steps": [
+        {
+          "id": "A-0001",
+          "key": "step_validate_type",
+          "text": "Raise TypeError if text is not a string",
+          "implements": [
+            "fail_type_error"
+          ],
+          "uses": []
+        },
+        {
+          "id": "A-0002",
+          "key": "step_remove_non_ascii",
+          "text": "Remove all non-ASCII characters from the text",
+          "implements": [
+            "neg_no_transliteration",
+            "inv_valid_characters_only"
+          ],
+          "uses": []
+        },
+        {
+          "id": "A-0003",
+          "key": "step_normalize_case",
+          "text": "Convert all ASCII letters to lowercase",
+          "implements": [
+            "inv_valid_characters_only"
+          ],
+          "uses": []
+        },
+        {
+          "id": "A-0004",
+          "key": "step_filter_characters",
+          "text": "Remove or process characters not in the valid character set, treating removed characters as word boundaries",
+          "implements": [
+            "inv_valid_characters_only"
+          ],
+          "uses": [
+            "const_valid_characters"
+          ]
+        },
+        {
+          "id": "A-0005",
+          "key": "step_form_slug",
+          "text": "Arrange remaining alphanumeric sequences separated by hyphens while maintaining their original relative order",
+          "implements": [
+            "inv_order_preserved",
+            "inv_valid_characters_only"
+          ],
+          "uses": [
+            "const_valid_characters"
+          ]
+        },
+        {
+          "id": "A-0006",
+          "key": "step_return",
+          "text": "Return the resulting slug",
+          "implements": [],
+          "uses": []
+        }
+      ]
+    }
+  ],
+  "version": 1,
+  "retired": []
+}

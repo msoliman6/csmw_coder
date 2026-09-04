@@ -1,0 +1,28 @@
+{
+  "recipe": "code_builder",
+  "roles": {
+    "author": {
+      "backend": "claude_cli",
+      "model": "claude-sonnet-5",
+      "effort": "low",
+      "thinking": false
+    },
+    "checker": {
+      "backend": "codex_cli",
+      "model": "gpt-5.4-mini",
+      "effort": "low",
+      "thinking": false
+    }
+  },
+  "swaps": [
+    [
+      "author",
+      "checker"
+    ]
+  ],
+  "mode": "auto",
+  "rounds": 1,
+  "inputs": {
+    "fix_rounds": 1
+  }
+}

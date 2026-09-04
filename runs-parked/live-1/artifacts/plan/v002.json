@@ -1,0 +1,74 @@
+{
+  "blocks": [
+    {
+      "id": "K-0001",
+      "name": "slug",
+      "boundary": "The slug module implementing the slugify(text: str) -> str function that converts any text string into a URL-safe slug containing only a-z, 0-9, and hyphens.",
+      "inputs": [
+        "text: str",
+        "text: None (error case)"
+      ],
+      "outputs": [
+        "slug: str (lowercase, hyphen-joined words, no special chars)",
+        "TypeError: exception when input is None or non-string"
+      ],
+      "writes": [
+        "slug.py"
+      ],
+      "shape_driver": "Single function requirement; must handle all input types and produce character-constrained output; no dependencies allowed"
+    },
+    {
+      "id": "K-0002",
+      "name": "tests",
+      "boundary": "Test suite verifying the slug module meets all decided functional requirements and satisfies the 14 assumptions in the assumptions ledger; the four not-yet-decided behaviors remain in not_decided and will be tested for consistency with implementation choices made during development.",
+      "inputs": [
+        "slug module: importable Python module"
+      ],
+      "outputs": [
+        "test results: pass/fail verification of all 14 decided assumptions; implementation-consistent validation of four open behaviors"
+      ],
+      "writes": [
+        "test_slug.py"
+      ],
+      "shape_driver": "All decided assumptions from the ledger must be verified through automated tests; edge cases and error handling for decided behaviors must be confirmed; four undecided behaviors require implementation-flexible test design"
+    }
+  ],
+  "decomposition": "Two blocks separate implementation from verification. The slug module implements the core `slugify()` function with complete character filtering, word boundary detection, and output formatting logic. The tests block verifies correctness against all 14 decided assumptions and handles the 4 undecided behaviors through flexible testing that accommodates multiple valid implementations. This decomposition reflects natural separation of concerns (build vs. verify) and dependency flow (tests depend on implementation) without over-fragmenting a single-function library.",
+  "constants": [
+    "PYTHON_3_11",
+    "NO_EXTERNAL_DEPENDENCIES",
+    "VALID_SLUG_CHARSET",
+    "MODULE_NAME",
+    "FUNCTION_SIGNATURE"
+  ],
+  "order": [
+    "slug",
+    "tests"
+  ],
+  "rejected": [
+    {
+      "idea": "Separate block per algorithm phase (input validation, text normalization, word boundary detection, slug construction)",
+      "why": "dead at this size—too fine-grained decomposition for a single compact function"
+    },
+    {
+      "idea": "Internal utilities block for character classification and separator detection",
+      "why": "dead on method—brief specifies one public function; helper logic is implementation detail, not a boundary-bearing block"
+    },
+    {
+      "idea": "CLI block for command-line slug generation",
+      "why": "out of scope per brief"
+    }
+  ],
+  "risks": [
+    "Non-ASCII character handling: brief excludes transliteration but does not specify whether non-ASCII should raise error, be silently removed, or be kept; ambiguity in scope boundary",
+    "Edge case behavior: slugify('!!!'), slugify(''), and slugify('   ') return values are not specified; implementation must choose (empty string vs. error)",
+    "CamelCase splitting: no specification whether HelloWorld should become hello-world or be treated as a single word; affects word order preservation interpretation",
+    "Python 3.11 only: string handling edge cases (e.g., very long strings, unusual Unicode category characters) may behave unexpectedly"
+  ],
+  "not_decided": [
+    "CamelCase handling: whether letter-case transitions mark word boundaries (decides if HelloWorld → hello-world or stays as-is)",
+    "All-separator input: behavior when input contains only non-alphanumeric chars (slugify('!!!') → '' or error?)",
+    "Empty string input: whether empty string input returns empty string or raises error",
+    "Non-ASCII characters: whether to silently remove, raise TypeError, or have other behavior"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "version": 3,
+  "sha_full": "b309483898566c9e8d0fed53bf8c0de8cb687132f94a31b0e6a6a6eda69c1ccc",
+  "sha_test_visible": "4a66ff771311dfff001475f2bf4f66da528cbac83ece6c243f5bb3fa5add4ef1",
+  "clauses": 25,
+  "steps": 7,
+  "retired": [
+    "A-0001",
+    "A-0002",
+    "A-0003",
+    "A-0004",
+    "A-0005",
+    "A-0006",
+    "A-0007"
+  ]
+}

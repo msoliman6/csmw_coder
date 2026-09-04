@@ -1,0 +1,11 @@
+{
+  "round": 1,
+  "artifact_version": 2,
+  "decisions": [
+    {
+      "id": "F-0003",
+      "status": "accepted",
+      "arbitration": "Tightened P-0003\u2019s falsifying condition so it also checks that the ASCII alphanumeric subsequence order matches the input, not just that transliteration did not occur."
+    }
+  ]
+}

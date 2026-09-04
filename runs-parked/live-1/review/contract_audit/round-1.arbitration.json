@@ -1,0 +1,11 @@
+{
+  "round": 1,
+  "artifact_version": 3,
+  "decisions": [
+    {
+      "id": "F-0005",
+      "status": "rejected",
+      "arbitration": "The algorithm step explicitly joins non-empty words with hyphens. When zero words exist, this deterministically produces an empty string satisfying all invariants including no leading/trailing hyphens. The contract behavior is fully specified and logically determinable; test authors need not guess."
+    }
+  ]
+}

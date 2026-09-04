@@ -1,0 +1,44 @@
+{
+  "id": "blocks.r1",
+  "name": "blocks",
+  "round": 1,
+  "kind": "judgment",
+  "title": "Confirm the blocks",
+  "questions": [
+    {
+      "id": "Q-0001",
+      "text": "Unit `slugify(text) -> str`: Returns a URL-safe string containing only lowercase letters, digits, and hyphens, with words in original order and no leading or trailing hyphens",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [
+        "C-0007"
+      ],
+      "gloss": "Returns a URL-safe string containing only lowercase letters, digits, and hyphens, with words in original order and no leading or trailing hyphens"
+    }
+  ],
+  "carried": [
+    {
+      "id": "F-0004",
+      "severity": "major",
+      "cites": [
+        "A-0003",
+        "C-0013",
+        "C-0021"
+      ],
+      "kind": "gap",
+      "klass": "actionable",
+      "argument": "`A-0003` says to replace each non-alphanumeric character with a space, but it never defines whether \"alphanumeric\" is ASCII-only or Unicode-aware. In Python, `str.isalnum()` treats many non-ASCII letters as alphanumeric, which would preserve them and violate `C-0013`'s output charset while also conflicting with `C-0021`'s requirement that non-ASCII input not be transliterated. The contract needs an explicit ASCII-only rule here so implementers do not diverge.",
+      "status": "carried",
+      "arbitration": null,
+      "round": 2
+    }
+  ],
+  "can_revise": true,
+  "at": "2026-09-03T23:15:33.792945Z"
+}

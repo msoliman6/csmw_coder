@@ -1,0 +1,16 @@
+[
+  {
+    "id": "F-0004",
+    "severity": "major",
+    "cites": [
+      "P-0006",
+      "C-0007"
+    ],
+    "kind": "finding",
+    "klass": "actionable",
+    "argument": "P-0006's falsifying condition tests for transliteration and reordering but not for removal of ASCII alphanumerics. C-0007 requires 'Alphanumeric content from input appears in the output in the same relative order,' meaning all ASCII alphanumerics must be present. If slugify('a\u00e9b') produces 'a' instead of 'ab', no violation is detected because: (1) no new characters are introduced, and (2) 'preserves the characters' is false when 'b' is missing, rendering the entire falsifying condition false. The property must also check that the ASCII alphanumeric subsequence of the output exactly matches the input's, not just that order is preserved where characters exist.",
+    "status": "carried",
+    "arbitration": null,
+    "round": 2
+  }
+]

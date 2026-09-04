@@ -1,0 +1,451 @@
+{
+  "run_id": "live-1",
+  "recipe": "code_builder",
+  "task": {
+    "task_id": "live-1",
+    "objective": "Build slug: a tiny library that turns any string into a URL slug.",
+    "recipe": "code_builder",
+    "agents": [],
+    "inputs": {
+      "brief": {
+        "request": "Build slug: a tiny library that turns any string into a URL slug: lowercase ascii words joined by single hyphens.",
+        "context": "A standalone Python module, no dependencies.",
+        "surface": "one function, slugify(text: str) -> str, in module slug",
+        "must_be_true": [
+          "only a-z, 0-9 and '-' appear in a slug",
+          "words keep their order",
+          "None raises TypeError"
+        ],
+        "constraints": [
+          "python 3.11",
+          "no third-party packages"
+        ],
+        "out_of_scope": [
+          "transliteration of non-ascii letters",
+          "a CLI"
+        ],
+        "known_reference": "",
+        "language": "python",
+        "module": "slug"
+      },
+      "fix_rounds": 1
+    },
+    "roles": {
+      "author": {
+        "backend": "claude_cli",
+        "model": "claude-haiku-4-5",
+        "effort": "low",
+        "thinking": false
+      },
+      "checker": {
+        "backend": "codex_cli",
+        "model": "gpt-5.4-mini",
+        "effort": "low",
+        "thinking": false
+      }
+    },
+    "swaps": [
+      [
+        "author",
+        "checker"
+      ]
+    ],
+    "require_cross_vendor": true,
+    "mode": "auto",
+    "rounds": 1,
+    "max_runtime_minutes": null,
+    "max_tokens_total": null,
+    "max_llm_calls": null,
+    "evaluations": [],
+    "metadata": {}
+  },
+  "status": "COMPLETED",
+  "outcome": "completed",
+  "steps": {
+    "p0-brief": {
+      "key": "p0-brief",
+      "kind": "code",
+      "issued_at": "2026-09-03T23:07:32.624584Z",
+      "started_at": "2026-09-03T23:07:32.624932Z",
+      "done_at": "2026-09-03T23:07:32.625768Z",
+      "attempts": 1,
+      "deliverables": [
+        "artifacts/brief/v001.json"
+      ]
+    },
+    "p0-ledger": {
+      "key": "p0-ledger",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:07:32.626194Z",
+      "started_at": "2026-09-03T23:07:32.626547Z",
+      "done_at": "2026-09-03T23:08:16.802827Z",
+      "attempts": 1,
+      "deliverables": [
+        "artifacts/ledger/v001.json"
+      ]
+    },
+    "p0-gate-ledger": {
+      "key": "p0-gate-ledger",
+      "kind": "gate",
+      "issued_at": "2026-09-03T23:08:16.803872Z",
+      "started_at": "2026-09-03T23:08:16.804472Z",
+      "done_at": "2026-09-03T23:08:16.807604Z",
+      "attempts": 1,
+      "deliverables": [
+        "gates/ledger.r1.decision.json"
+      ]
+    },
+    "p0-plan": {
+      "key": "p0-plan",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:08:16.808663Z",
+      "started_at": "2026-09-03T23:08:16.809213Z",
+      "done_at": "2026-09-03T23:09:24.054067Z",
+      "attempts": 1,
+      "deliverables": [
+        "artifacts/plan/v001.json"
+      ]
+    },
+    "plan-review-r1": {
+      "key": "plan-review-r1",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:09:24.055473Z",
+      "started_at": "2026-09-03T23:09:24.056009Z",
+      "done_at": "2026-09-03T23:09:39.761413Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/plan/round-1.findings.json"
+      ]
+    },
+    "plan-arbitrate-r1": {
+      "key": "plan-arbitrate-r1",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:09:39.763463Z",
+      "started_at": "2026-09-03T23:09:39.764174Z",
+      "done_at": "2026-09-03T23:10:24.067750Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/plan/round-1.arbitration.json",
+        "artifacts/plan/v002.json"
+      ]
+    },
+    "plan-review-r2": {
+      "key": "plan-review-r2",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:10:24.069888Z",
+      "started_at": "2026-09-03T23:10:24.070342Z",
+      "done_at": "2026-09-03T23:10:40.963834Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/plan/round-2.findings.json"
+      ]
+    },
+    "p1-contract": {
+      "key": "p1-contract",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:10:40.967295Z",
+      "started_at": "2026-09-03T23:10:40.968042Z",
+      "done_at": "2026-09-03T23:12:30.566042Z",
+      "attempts": 1,
+      "deliverables": [
+        "artifacts/contract/v001.json"
+      ]
+    },
+    "contract-review-r1": {
+      "key": "contract-review-r1",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:12:30.568033Z",
+      "started_at": "2026-09-03T23:12:30.568414Z",
+      "done_at": "2026-09-03T23:12:52.351274Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/contract/round-1.findings.json"
+      ]
+    },
+    "contract-arbitrate-r1": {
+      "key": "contract-arbitrate-r1",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:12:52.353953Z",
+      "started_at": "2026-09-03T23:12:52.354433Z",
+      "done_at": "2026-09-03T23:14:10.108013Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/contract/round-1.arbitration.json",
+        "artifacts/contract/v002.json"
+      ]
+    },
+    "contract-review-r2": {
+      "key": "contract-review-r2",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:14:10.114726Z",
+      "started_at": "2026-09-03T23:14:10.115907Z",
+      "done_at": "2026-09-03T23:14:24.214870Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/contract/round-2.findings.json"
+      ]
+    },
+    "contract_audit-review-r1": {
+      "key": "contract_audit-review-r1",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:14:24.225103Z",
+      "started_at": "2026-09-03T23:14:24.226240Z",
+      "done_at": "2026-09-03T23:14:35.539094Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/contract_audit/round-1.findings.json"
+      ]
+    },
+    "contract_audit-arbitrate-r1": {
+      "key": "contract_audit-arbitrate-r1",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:14:35.542788Z",
+      "started_at": "2026-09-03T23:14:35.543289Z",
+      "done_at": "2026-09-03T23:15:27.890703Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/contract_audit/round-1.arbitration.json",
+        "artifacts/contract/v003.json"
+      ]
+    },
+    "contract_audit-review-r2": {
+      "key": "contract_audit-review-r2",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:15:27.895734Z",
+      "started_at": "2026-09-03T23:15:27.896239Z",
+      "done_at": "2026-09-03T23:15:33.784006Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/contract_audit/round-2.findings.json"
+      ]
+    },
+    "p1-gate-blocks-r1": {
+      "key": "p1-gate-blocks-r1",
+      "kind": "gate",
+      "issued_at": "2026-09-03T23:15:33.790919Z",
+      "started_at": "2026-09-03T23:15:33.791633Z",
+      "done_at": "2026-09-03T23:15:33.800562Z",
+      "attempts": 1,
+      "deliverables": [
+        "gates/blocks.r1.decision.json"
+      ]
+    },
+    "p1-freeze": {
+      "key": "p1-freeze",
+      "kind": "code",
+      "issued_at": "2026-09-03T23:15:33.805989Z",
+      "started_at": "2026-09-03T23:15:33.806535Z",
+      "done_at": "2026-09-03T23:15:33.812959Z",
+      "attempts": 1,
+      "deliverables": [
+        "freeze.json",
+        "CONTRACT.full.md",
+        "CONTRACT.test-visible.md"
+      ]
+    },
+    "p2-vspec": {
+      "key": "p2-vspec",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:15:33.818086Z",
+      "started_at": "2026-09-03T23:15:33.818626Z",
+      "done_at": "2026-09-03T23:15:55.221031Z",
+      "attempts": 1,
+      "deliverables": [
+        "artifacts/vspec/v001.json"
+      ]
+    },
+    "vspec-review-r1": {
+      "key": "vspec-review-r1",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:15:55.231085Z",
+      "started_at": "2026-09-03T23:15:55.231899Z",
+      "done_at": "2026-09-03T23:18:14.174822Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/vspec/round-1.findings.json"
+      ]
+    },
+    "vspec-arbitrate-r1": {
+      "key": "vspec-arbitrate-r1",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:18:14.182629Z",
+      "started_at": "2026-09-03T23:18:14.183506Z",
+      "done_at": "2026-09-03T23:18:37.087841Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/vspec/round-1.arbitration.json",
+        "artifacts/vspec/v002.json"
+      ]
+    },
+    "vspec-review-r2": {
+      "key": "vspec-review-r2",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:18:37.098071Z",
+      "started_at": "2026-09-03T23:18:37.098940Z",
+      "done_at": "2026-09-03T23:20:18.555888Z",
+      "attempts": 1,
+      "deliverables": [
+        "review/vspec/round-2.findings.json"
+      ]
+    },
+    "p2-coverage": {
+      "key": "p2-coverage",
+      "kind": "check",
+      "issued_at": "2026-09-03T23:20:18.565099Z",
+      "started_at": "2026-09-03T23:20:18.565912Z",
+      "done_at": "2026-09-03T23:20:18.574243Z",
+      "attempts": 1,
+      "deliverables": [
+        "coverage.json"
+      ]
+    },
+    "p2-gate-verification": {
+      "key": "p2-gate-verification",
+      "kind": "gate",
+      "issued_at": "2026-09-03T23:20:18.580941Z",
+      "started_at": "2026-09-03T23:20:18.581543Z",
+      "done_at": "2026-09-03T23:20:18.589166Z",
+      "attempts": 1,
+      "deliverables": [
+        "gates/verification.r1.decision.json"
+      ]
+    },
+    "p2-tasks": {
+      "key": "p2-tasks",
+      "kind": "code",
+      "issued_at": "2026-09-03T23:20:18.594878Z",
+      "started_at": "2026-09-03T23:20:18.595323Z",
+      "done_at": "2026-09-03T23:20:18.601553Z",
+      "attempts": 1,
+      "deliverables": [
+        "artifacts/tasks/v001.json"
+      ]
+    },
+    "p3-tests": {
+      "key": "p3-tests",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:20:18.606849Z",
+      "started_at": "2026-09-03T23:20:18.607329Z",
+      "done_at": "2026-09-03T23:21:10.303054Z",
+      "attempts": 1,
+      "deliverables": [
+        "build/tests/test_slug.py",
+        "build/manifest.json"
+      ]
+    },
+    "p3-implement": {
+      "key": "p3-implement",
+      "kind": "author",
+      "issued_at": "2026-09-03T23:20:18.606940Z",
+      "started_at": "2026-09-03T23:21:10.303493Z",
+      "done_at": "2026-09-03T23:22:56.540471Z",
+      "attempts": 1,
+      "deliverables": [
+        "build/src/slug.py"
+      ]
+    },
+    "p4-verify-1": {
+      "key": "p4-verify-1",
+      "kind": "code",
+      "issued_at": "2026-09-03T23:22:56.545669Z",
+      "started_at": "2026-09-03T23:22:56.546120Z",
+      "done_at": "2026-09-03T23:22:57.098728Z",
+      "attempts": 1,
+      "deliverables": [
+        "artifacts/results/v001.json"
+      ]
+    },
+    "p4-report": {
+      "key": "p4-report",
+      "kind": "code",
+      "issued_at": "2026-09-03T23:22:57.104435Z",
+      "started_at": "2026-09-03T23:22:57.104957Z",
+      "done_at": "2026-09-03T23:22:57.113835Z",
+      "attempts": 1,
+      "deliverables": [
+        "artifacts/report/v001.json",
+        "REPORT.md"
+      ]
+    }
+  },
+  "carried": [
+    {
+      "kind": "finding",
+      "id": "F-0002",
+      "summary": "[major/contract_misread] `K-0001` states the slug must contain only `a-z, 0-9, and hyphens`, but `K-0002` leaves non-ASCII handling open and explicitly allows the tests to be \"implement",
+      "from_step": "plan round 2"
+    },
+    {
+      "kind": "finding",
+      "id": "F-0004",
+      "summary": "[major/actionable] `A-0003` says to replace each non-alphanumeric character with a space, but it never defines whether \"alphanumeric\" is ASCII-only or Unicode-aware. In Python, `s",
+      "from_step": "contract round 2"
+    },
+    {
+      "kind": "finding",
+      "id": "F-0009",
+      "summary": "[major/actionable] C-0024 and C-0025 specify that TypeError should be raised with a message 'indicating type error'. However, P-0013's observe and falsifies fields test only that ",
+      "from_step": "vspec round 2"
+    },
+    {
+      "kind": "finding",
+      "id": "F-0010",
+      "summary": "[major/actionable] C-0021 requires that non-ASCII characters not be transliterated, and C-0013 restricts output to ASCII characters only. These constraints together require non-AS",
+      "from_step": "vspec round 2"
+    },
+    {
+      "kind": "property",
+      "id": "P-0009",
+      "summary": "missing: ",
+      "from_step": "verify"
+    },
+    {
+      "kind": "property",
+      "id": "P-0010",
+      "summary": "missing: ",
+      "from_step": "verify"
+    },
+    {
+      "kind": "property",
+      "id": "P-0011",
+      "summary": "missing: ",
+      "from_step": "verify"
+    },
+    {
+      "kind": "property",
+      "id": "P-0012",
+      "summary": "missing: ",
+      "from_step": "verify"
+    },
+    {
+      "kind": "property",
+      "id": "P-0013",
+      "summary": "missing: ",
+      "from_step": "verify"
+    },
+    {
+      "kind": "property",
+      "id": "P-0014",
+      "summary": "missing: ",
+      "from_step": "verify"
+    },
+    {
+      "kind": "property",
+      "id": "P-0015",
+      "summary": "missing: ",
+      "from_step": "verify"
+    },
+    {
+      "kind": "property",
+      "id": "P-0016",
+      "summary": "missing: ",
+      "from_step": "verify"
+    }
+  ],
+  "created_at": "2026-09-03T23:07:32.613612Z",
+  "updated_at": "2026-09-03T23:22:57.125352Z",
+  "resumed_count": 0,
+  "last_halt": null,
+  "completed_at": "2026-09-03T23:22:57.125347Z",
+  "extra": {}
+}

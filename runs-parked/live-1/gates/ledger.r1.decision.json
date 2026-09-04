@@ -1,0 +1,128 @@
+{
+  "gate": "ledger.r1",
+  "action": "proceed",
+  "decisions": [
+    {
+      "question_id": "Q-0001",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0002",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0003",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0004",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0005",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0006",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0007",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0008",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0009",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0010",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0011",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0012",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0013",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0014",
+      "answer": "",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0015",
+      "answer": "",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0016",
+      "answer": "",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0017",
+      "answer": "",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    }
+  ],
+  "comments": {},
+  "source": "auto",
+  "at": "2026-09-03T23:08:16.805826Z"
+}

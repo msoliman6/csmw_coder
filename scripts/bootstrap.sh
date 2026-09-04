@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# First use: a venv in the plugin's data dir with the harness and this workflow installed.
+# Idempotent and quiet: prints one line at the end. Everything else goes to $DATA/bootstrap.log.
+source "$(dirname "${BASH_SOURCE[0]}")/env.sh"
+LOG="$DATA/bootstrap.log"
+{
+  if [ -z "$HARNESS" ]; then
+    for cand in "$DATA/harness" "$HOME/Documents/Agents_design/code_steer_model_write"; do
+      [ -f "$cand/pyproject.toml" ] && HARNESS="$cand" && break
+    done
+  fi
+  if [ -z "$HARNESS" ] || [ ! -f "$HARNESS/pyproject.toml" ]; then
+    command -v gh >/dev/null || { echo "need gh to fetch the harness, or set harness_path"; exit 2; }
+    gh repo clone msoliman6/code_steer_model_write "$DATA/harness" -- --quiet
+    HARNESS="$DATA/harness"
+  fi
+  if [ ! -x "$VENV/bin/python" ] && [ -x "$PLUGIN_ROOT/.venv/bin/csmw" ]; then
+    ln -s "$PLUGIN_ROOT/.venv" "$VENV"   # installed from a checkout that already has its venv
+  fi
+  if [ ! -x "$VENV/bin/python" ]; then
+    PY="$(command -v python3.11 || command -v python3)"
+    "$PY" -m venv "$VENV"
+  fi
+  "$VENV/bin/pip" install -q --upgrade pip
+  "$VENV/bin/pip" install -q -e "$HARNESS" -e "$PLUGIN_ROOT"
+  echo "$HARNESS" > "$DATA/harness.path"
+} >> "$LOG" 2>&1 || { echo "bootstrap failed; see $LOG"; exit 1; }
+echo "ready: venv $VENV, harness $(cat "$DATA/harness.path"), runs $RUNS"

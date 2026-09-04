@@ -1,0 +1,5 @@
+{
+  "P-0004": "tests/test_slug.py::test_P_0004_non_string_inputs_raise_type_error",
+  "P-0005": "tests/test_slug.py::test_P_0005_allowed_character_set_only",
+  "P-0006": "tests/test_slug.py::test_P_0006_asciialnum_order_is_preserved"
+}

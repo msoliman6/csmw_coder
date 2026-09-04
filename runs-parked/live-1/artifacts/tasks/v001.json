@@ -1,0 +1,41 @@
+{
+  "rows": [
+    {
+      "id": "T-0001",
+      "kind": "B",
+      "owner": "author",
+      "produces": "the ## Contract: Contract: The slug module implementing the slugify(text: str) -> str function that converts any text string into a URL-safe slug containing only lowercase letters, digits, and hyphens. (v1) (v2) module",
+      "writes": [
+        "src/slug.py"
+      ],
+      "covers": [
+        "C-0007"
+      ],
+      "depends": [],
+      "done_when": "compiles, lints, names every A- step, passes the properties",
+      "status": "todo"
+    },
+    {
+      "id": "T-0002",
+      "kind": "T",
+      "owner": "checker",
+      "produces": "the ## Contract: Contract: The slug module implementing the slugify(text: str) -> str function that converts any text string into a URL-safe slug containing only lowercase letters, digits, and hyphens. (v1) (v2) tests",
+      "writes": [
+        "tests/test_slug.py"
+      ],
+      "covers": [
+        "P-0009",
+        "P-0010",
+        "P-0011",
+        "P-0012",
+        "P-0013",
+        "P-0014",
+        "P-0015",
+        "P-0016"
+      ],
+      "depends": [],
+      "done_when": "one test per property, every test fails against the null",
+      "status": "todo"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "csmw",
+  "plugins": [
+    {
+      "name": "csmw-coder",
+      "displayName": "csmw coder",
+      "description": "Build a Python module on the side with two model sides of different vendors, code deciding every step.",
+      "version": "0.1.0",
+      "source": "./",
+      "homepage": "https://github.com/msoliman6/csmw_coder",
+      "author": {
+        "name": "Moamen Soliman",
+        "url": "https://github.com/msoliman6"
+      },
+      "license": "MIT",
+      "keywords": [
+        "coding",
+        "codex",
+        "adversarial-review"
+      ]
+    }
+  ],
+  "owner": {
+    "name": "Moamen Soliman",
+    "url": "https://github.com/msoliman6"
+  },
+  "description": "The csmw coder: a Python module built on the side by two model sides of different vendors."
+}

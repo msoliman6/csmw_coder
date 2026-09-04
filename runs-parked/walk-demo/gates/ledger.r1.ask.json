@@ -1,0 +1,40 @@
+{
+  "id": "ledger.r1",
+  "name": "ledger",
+  "round": 1,
+  "kind": "input",
+  "title": "Confirm the assumptions, by exception",
+  "questions": [
+    {
+      "id": "Q-0001",
+      "text": "the slug is for URLs: ascii only, hyphen-separated (basis: the brief's request; if wrong: unicode words vanish)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0002",
+      "text": "one module, one public function (basis: the brief's surface; if wrong: the plan needs a second block)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    }
+  ],
+  "carried": [],
+  "can_revise": false,
+  "at": "2026-09-03T23:02:00.566387Z"
+}

@@ -1,0 +1,19 @@
+{
+  "rows": [
+    {
+      "id": null,
+      "assumption": "the slug is for URLs: ascii only, hyphen-separated",
+      "basis": "the brief's request",
+      "if_wrong": "unicode words vanish",
+      "confirm": "unknown"
+    },
+    {
+      "id": null,
+      "assumption": "one module, one public function",
+      "basis": "the brief's surface",
+      "if_wrong": "the plan needs a second block",
+      "confirm": "unknown"
+    }
+  ],
+  "queue": []
+}

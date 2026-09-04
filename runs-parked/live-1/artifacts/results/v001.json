@@ -1,0 +1,76 @@
+{
+  "properties": [
+    {
+      "property": "P-0009",
+      "test": "tests/test_slug.py::test_P_0009_charset",
+      "real": "missing",
+      "null": "missing",
+      "runs": 3,
+      "passes": 0,
+      "assertion": ""
+    },
+    {
+      "property": "P-0010",
+      "test": "tests/test_slug.py::test_P_0010_no_edge_or_double_hyphens",
+      "real": "missing",
+      "null": "missing",
+      "runs": 3,
+      "passes": 0,
+      "assertion": ""
+    },
+    {
+      "property": "P-0011",
+      "test": "tests/test_slug.py::test_P_0011_preserves_word_order",
+      "real": "missing",
+      "null": "missing",
+      "runs": 3,
+      "passes": 0,
+      "assertion": ""
+    },
+    {
+      "property": "P-0012",
+      "test": "tests/test_slug.py::test_P_0012_removes_punctuation_and_symbols",
+      "real": "missing",
+      "null": "missing",
+      "runs": 3,
+      "passes": 0,
+      "assertion": ""
+    },
+    {
+      "property": "P-0013",
+      "test": "tests/test_slug.py::test_P_0013_non_string_inputs_raise_typeerror",
+      "real": "missing",
+      "null": "missing",
+      "runs": 3,
+      "passes": 0,
+      "assertion": ""
+    },
+    {
+      "property": "P-0014",
+      "test": "tests/test_slug.py::test_P_0014_no_ascii_transliteration_of_non_ascii",
+      "real": "missing",
+      "null": "missing",
+      "runs": 3,
+      "passes": 0,
+      "assertion": ""
+    },
+    {
+      "property": "P-0015",
+      "test": "tests/test_slug.py::test_P_0015_stable_and_no_extra_separator_artifacts",
+      "real": "missing",
+      "null": "missing",
+      "runs": 3,
+      "passes": 0,
+      "assertion": ""
+    },
+    {
+      "property": "P-0016",
+      "test": "tests/test_slug.py::test_P_0016_valid_charset_for_simple_token",
+      "real": "missing",
+      "null": "missing",
+      "runs": 3,
+      "passes": 0,
+      "assertion": ""
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "gate": "blocks.r1",
+  "action": "proceed",
+  "decisions": [
+    {
+      "question_id": "Q-0001",
+      "answer": "yes",
+      "answered_by": "auto",
+      "flagged": true,
+      "comment": ""
+    }
+  ],
+  "comments": {},
+  "source": "auto",
+  "at": "2026-09-03T23:15:33.793444Z"
+}

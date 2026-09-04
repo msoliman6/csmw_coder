@@ -1,0 +1,36 @@
+{
+  "id": "verification.r1",
+  "name": "verification",
+  "round": 1,
+  "kind": "judgment",
+  "title": "Confirm the verification design",
+  "questions": [],
+  "carried": [
+    {
+      "id": "F-0004",
+      "severity": "major",
+      "cites": [
+        "P-0006",
+        "C-0007"
+      ],
+      "kind": "finding",
+      "klass": "actionable",
+      "argument": "P-0006's falsifying condition tests for transliteration and reordering but not for removal of ASCII alphanumerics. C-0007 requires 'Alphanumeric content from input appears in the output in the same relative order,' meaning all ASCII alphanumerics must be present. If slugify('aéb') produces 'a' instead of 'ab', no violation is detected because: (1) no new characters are introduced, and (2) 'preserves the characters' is false when 'b' is missing, rendering the entire falsifying condition false. The property must also check that the ASCII alphanumeric subsequence of the output exactly matches the input's, not just that order is preserved where characters exist.",
+      "status": "carried",
+      "arbitration": null,
+      "round": 2
+    },
+    {
+      "id": "C-0004",
+      "kind": "uncovered",
+      "argument": "no property cites this clause"
+    },
+    {
+      "id": "C-0008",
+      "kind": "uncovered",
+      "argument": "no property cites this clause"
+    }
+  ],
+  "can_revise": true,
+  "at": "2026-09-04T03:18:09.379742Z"
+}

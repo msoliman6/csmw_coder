@@ -1,0 +1,238 @@
+{
+  "id": "ledger.r1",
+  "name": "ledger",
+  "round": 1,
+  "kind": "input",
+  "title": "Confirm the assumptions, by exception",
+  "questions": [
+    {
+      "id": "Q-0001",
+      "text": "Function signature is slugify(text: str) -> str (basis: brief's surface specification; if wrong: function is not callable with the contracted signature)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0002",
+      "text": "Function is located in module named 'slug' (basis: brief's module specification; if wrong: module cannot be imported or function cannot be found)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0003",
+      "text": "Output contains only characters a-z, 0-9, and hyphen (basis: brief's must_be_true constraint; if wrong: output violates the character whitelist, making it an invalid slug)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0004",
+      "text": "Relative order of words in input is preserved in output (basis: brief's must_be_true: 'words keep their order'; if wrong: word sequence is scrambled, violating the contract)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0005",
+      "text": "Input of type None raises TypeError (basis: brief's must_be_true: 'None raises TypeError'; if wrong: invalid input is not rejected as specified)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0006",
+      "text": "Input text is converted to lowercase (basis: brief's surface: 'lowercase ascii words'; required to meet character constraint; if wrong: output contains uppercase letters, violating the a-z-only requirement)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0007",
+      "text": "Non-ASCII characters are not transliterated to ASCII equivalents (basis: brief's out_of_scope: 'transliteration of non-ascii letters'; if wrong: non-ASCII input is converted, contradicting the stated scope boundary)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0008",
+      "text": "Implementation targets Python 3.11 (basis: brief's constraints: 'python 3.11'; if wrong: code may use incompatible syntax or be tested/deployed against wrong version)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0009",
+      "text": "No third-party packages are imported or required (basis: brief's context: 'no dependencies'; if wrong: module has external requirements, breaking the standalone contract)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0010",
+      "text": "Whitespace characters (space, tab, newline) act as word separators (basis: URL slug convention; brief's context 'URL slug'; if wrong: words are not split at whitespace boundaries, violating word order preservation)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0011",
+      "text": "Punctuation and special characters (not alphanumeric or hyphen) are removed from output (basis: URL slug convention; required by must_be_true character constraint; if wrong: invalid characters appear in output, violating the a-z, 0-9, '-' constraint)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0012",
+      "text": "Consecutive separators (multiple spaces, punctuation sequences) collapse to a single hyphen (basis: brief's surface: 'joined by single hyphens'; URL slug convention; if wrong: output contains consecutive hyphens (e.g., 'word--word'), violating single-hyphen requirement)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0013",
+      "text": "Leading and trailing hyphens are removed from output (basis: URL slug convention; implied by 'words' being joined (words are interior structures); if wrong: output starts or ends with hyphen, producing malformed slug)",
+      "kind": "confirm",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "default": "yes",
+      "recommended": null,
+      "risky": false,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0014",
+      "text": "What constitutes a 'word' in the context of word order preservation? Should CamelCase be split (HelloWorld → hello-world) or kept together? (decides: whether the algorithm treats letter-case changes as word boundaries)",
+      "kind": "text",
+      "options": [],
+      "default": "",
+      "recommended": null,
+      "risky": true,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0015",
+      "text": "How should input strings with no alphanumeric characters be handled? Should slugify('!!!') return an empty string, or raise an error, or return the string unchanged? (decides: behavior on degenerate input that contains only separators/special characters)",
+      "kind": "text",
+      "options": [],
+      "default": "",
+      "recommended": null,
+      "risky": true,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0016",
+      "text": "What should happen with an empty string input? Should slugify('') return an empty string or raise an error? (decides: edge case behavior for zero-length input)",
+      "kind": "text",
+      "options": [],
+      "default": "",
+      "recommended": null,
+      "risky": true,
+      "cites": [],
+      "gloss": ""
+    },
+    {
+      "id": "Q-0017",
+      "text": "How should non-ASCII characters (accented letters, emoji, CJK, etc.) be handled? Should they be silently removed, or should the function raise an error for non-ASCII input? (decides: character filtering strategy for non-transliteratable characters)",
+      "kind": "text",
+      "options": [],
+      "default": "",
+      "recommended": null,
+      "risky": true,
+      "cites": [],
+      "gloss": ""
+    }
+  ],
+  "carried": [],
+  "can_revise": false,
+  "at": "2026-09-03T23:08:16.805216Z"
+}

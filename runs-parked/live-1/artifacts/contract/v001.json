@@ -1,0 +1,274 @@
+{
+  "block": "The slug module implementing the slugify(text: str) -> str function that converts any text string into a URL-safe slug containing only lowercase letters, digits, and hyphens.",
+  "vocabulary": [
+    {
+      "id": "C-0001",
+      "key": "slug_term",
+      "term": "slug",
+      "definition": "A URL-safe identifier composed of lowercase letters (a-z), digits (0-9), and hyphens, used as the output of the slugify function"
+    },
+    {
+      "id": "C-0002",
+      "key": "word_term",
+      "term": "word",
+      "definition": "A maximal sequence of alphanumeric characters separated by whitespace or special characters"
+    },
+    {
+      "id": "C-0003",
+      "key": "word_boundary_term",
+      "term": "word boundary",
+      "definition": "A location in text where words are separated by whitespace or non-alphanumeric characters"
+    },
+    {
+      "id": "C-0004",
+      "key": "separator_term",
+      "term": "separator",
+      "definition": "Whitespace or non-alphanumeric characters that act as word boundaries and are converted to hyphens in output"
+    }
+  ],
+  "input": [
+    {
+      "id": "C-0005",
+      "key": "text_param",
+      "name": "text",
+      "type": "str",
+      "tags": [
+        "required",
+        "main_input"
+      ]
+    }
+  ],
+  "output": [
+    {
+      "id": "C-0006",
+      "key": "slug_result",
+      "name": "slug",
+      "type": "str",
+      "tags": [
+        "main_output"
+      ]
+    }
+  ],
+  "units": [
+    {
+      "id": "C-0007",
+      "key": "slugify_func",
+      "name": "slugify",
+      "kind": "function",
+      "params": [
+        {
+          "name": "text",
+          "type": "str",
+          "default": null
+        }
+      ],
+      "returns": "str",
+      "holds": "Returns a URL-safe string containing only lowercase letters, digits, and hyphens, with words in original order and no leading or trailing hyphens"
+    }
+  ],
+  "constants": [
+    {
+      "id": "C-0008",
+      "key": "valid_charset_const",
+      "name": "VALID_SLUG_CHARSET",
+      "value": "\"abcdefghijklmnopqrstuvwxyz0123456789-\"",
+      "tag": "format"
+    },
+    {
+      "id": "C-0009",
+      "key": "hyphen_char_const",
+      "name": "HYPHEN",
+      "value": "\"-\"",
+      "tag": "format"
+    },
+    {
+      "id": "C-0010",
+      "key": "python_version_const",
+      "name": "PYTHON_VERSION",
+      "value": "\"3.11\"",
+      "tag": "limit"
+    },
+    {
+      "id": "C-0011",
+      "key": "module_name_const",
+      "name": "MODULE_NAME",
+      "value": "\"slug\"",
+      "tag": "format"
+    },
+    {
+      "id": "C-0012",
+      "key": "function_name_const",
+      "name": "FUNCTION_NAME",
+      "value": "\"slugify\"",
+      "tag": "format"
+    }
+  ],
+  "invariants": [
+    {
+      "id": "C-0013",
+      "key": "inv_output_charset",
+      "claim": "Output contains only characters from VALID_SLUG_CHARSET: lowercase a-z, digits 0-9, and hyphen",
+      "measurement": ""
+    },
+    {
+      "id": "C-0014",
+      "key": "inv_word_order",
+      "claim": "Words in output appear in the same relative order as they appear in input",
+      "measurement": ""
+    },
+    {
+      "id": "C-0015",
+      "key": "inv_lowercase_only",
+      "claim": "All alphabetic characters in output are lowercase (a-z), never uppercase (A-Z)",
+      "measurement": ""
+    },
+    {
+      "id": "C-0016",
+      "key": "inv_no_leading_hyphen",
+      "claim": "Output does not begin with a hyphen character",
+      "measurement": ""
+    },
+    {
+      "id": "C-0017",
+      "key": "inv_no_trailing_hyphen",
+      "claim": "Output does not end with a hyphen character",
+      "measurement": ""
+    },
+    {
+      "id": "C-0018",
+      "key": "inv_no_consecutive_hyphens",
+      "claim": "Output does not contain consecutive hyphen characters (no -- substrings)",
+      "measurement": ""
+    },
+    {
+      "id": "C-0019",
+      "key": "inv_whitespace_separates",
+      "claim": "Whitespace characters in input act as word boundaries and separate words with hyphens in output",
+      "measurement": ""
+    },
+    {
+      "id": "C-0020",
+      "key": "inv_punctuation_removed",
+      "claim": "Non-alphanumeric characters and punctuation marks do not appear in output (except hyphen)",
+      "measurement": ""
+    },
+    {
+      "id": "C-0021",
+      "key": "inv_no_transliteration",
+      "claim": "Non-ASCII input characters are not transliterated or converted to ASCII equivalents",
+      "measurement": ""
+    }
+  ],
+  "negative": [
+    {
+      "id": "C-0022",
+      "key": "neg_no_external_deps",
+      "must_not": "Import or depend on third-party packages; only Python standard library is used"
+    },
+    {
+      "id": "C-0023",
+      "key": "neg_no_transliteration",
+      "must_not": "Implement transliteration logic that converts non-ASCII characters to ASCII substitutes"
+    }
+  ],
+  "failure": [
+    {
+      "id": "C-0024",
+      "key": "fail_none_input",
+      "on": "Input argument is None",
+      "policy": "Raise TypeError",
+      "observable": "TypeError exception is raised with message indicating type error"
+    },
+    {
+      "id": "C-0025",
+      "key": "fail_non_string_input",
+      "on": "Input argument is not a string type (int, list, dict, etc.)",
+      "policy": "Raise TypeError",
+      "observable": "TypeError exception is raised with message indicating type error"
+    }
+  ],
+  "tolerances": [],
+  "algorithm": [
+    {
+      "unit": "slugify_func",
+      "steps": [
+        {
+          "id": "A-0001",
+          "key": "step_validate_input_type",
+          "text": "Validate that input is a string type; raise TypeError if input is None or not a string",
+          "implements": [
+            "fail_none_input",
+            "fail_non_string_input"
+          ],
+          "uses": []
+        },
+        {
+          "id": "A-0002",
+          "key": "step_convert_lowercase",
+          "text": "Convert input string to lowercase using standard string case conversion",
+          "implements": [
+            "inv_lowercase_only"
+          ],
+          "uses": []
+        },
+        {
+          "id": "A-0003",
+          "key": "step_filter_non_alphanumeric",
+          "text": "Replace each non-alphanumeric character (excluding existing hyphens) with a space to identify word boundaries; non-ASCII characters are removed or converted to separators without transliteration",
+          "implements": [
+            "inv_punctuation_removed",
+            "inv_no_transliteration"
+          ],
+          "uses": []
+        },
+        {
+          "id": "A-0004",
+          "key": "step_split_on_whitespace",
+          "text": "Split the processed string on whitespace characters to extract individual words",
+          "implements": [
+            "inv_whitespace_separates"
+          ],
+          "uses": []
+        },
+        {
+          "id": "A-0005",
+          "key": "step_join_words_with_hyphens",
+          "text": "Join non-empty words with single hyphen separators, maintaining word order from input",
+          "implements": [
+            "inv_word_order",
+            "inv_no_consecutive_hyphens"
+          ],
+          "uses": [
+            "hyphen_char_const",
+            "valid_charset_const"
+          ]
+        },
+        {
+          "id": "A-0006",
+          "key": "step_strip_edge_hyphens",
+          "text": "Remove any leading or trailing hyphen characters from the result string",
+          "implements": [
+            "inv_no_leading_hyphen",
+            "inv_no_trailing_hyphen"
+          ],
+          "uses": [
+            "hyphen_char_const"
+          ]
+        },
+        {
+          "id": "A-0007",
+          "key": "step_verify_charset_constraint",
+          "text": "Verify that all characters in output conform to VALID_SLUG_CHARSET",
+          "implements": [
+            "inv_output_charset"
+          ],
+          "uses": [
+            "valid_charset_const"
+          ]
+        }
+      ]
+    }
+  ],
+  "version": 1,
+  "retired": []
+}

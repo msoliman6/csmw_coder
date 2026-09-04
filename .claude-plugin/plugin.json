@@ -1,0 +1,27 @@
+{
+  "name": "csmw-coder",
+  "displayName": "csmw coder",
+  "version": "0.1.0",
+  "description": "Build a Python module on the side: two model sides of different vendors, plan, frozen contract, verification design, isolated build, verification run, with code deciding every step. Started from a session, runs detached, never writes back into the session.",
+  "author": { "name": "Moamen Soliman", "url": "https://github.com/msoliman6" },
+  "repository": "https://github.com/msoliman6/csmw_coder",
+  "license": "MIT",
+  "keywords": ["coding", "claude-code", "codex", "adversarial-review", "constrained-decoding"],
+  "userConfig": {
+    "harness_path": {
+      "type": "string",
+      "title": "Harness checkout",
+      "description": "Path to the harness package checkout the workflow runs on (default: cloned into the plugin's data dir with gh)"
+    },
+    "runs_dir": {
+      "type": "string",
+      "title": "Runs directory",
+      "description": "Where runs live (default: ~/.csmw/runs), outside any project so a session's repo stays clean"
+    },
+    "dashboard_port": {
+      "type": "string",
+      "title": "Dashboard port",
+      "description": "The page's port (default: 3007)"
+    }
+  }
+}

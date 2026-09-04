@@ -1,0 +1,17 @@
+[
+  {
+    "id": "F-0005",
+    "severity": "minor",
+    "cites": [
+      "C-0005",
+      "C-0006",
+      "C-0007"
+    ],
+    "kind": "gap",
+    "klass": "actionable",
+    "argument": "The contract never says what `slugify` should return for an empty string or for inputs that normalize to no words, even though the input/output types and output invariant still allow that case. A test author would have to guess whether the expected slug is `\"\"` or some sentinel value, so this is underspecified.",
+    "status": "rejected",
+    "arbitration": "The algorithm step explicitly joins non-empty words with hyphens. When zero words exist, this deterministically produces an empty string satisfying all invariants including no leading/trailing hyphens. The contract behavior is fully specified and logically determinable; test authors need not guess.",
+    "round": 1
+  }
+]

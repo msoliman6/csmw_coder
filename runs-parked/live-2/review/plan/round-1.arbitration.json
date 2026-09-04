@@ -1,0 +1,11 @@
+{
+  "round": 1,
+  "artifact_version": 2,
+  "decisions": [
+    {
+      "id": "F-0001",
+      "status": "accepted",
+      "arbitration": "Updated K-0001 boundary to clarify that TypeError is raised for any non-string input, not merely None"
+    }
+  ]
+}

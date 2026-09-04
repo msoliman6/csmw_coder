@@ -1,0 +1,23 @@
+{
+  "gate": "ledger.r1",
+  "action": "proceed",
+  "decisions": [
+    {
+      "question_id": "Q-0001",
+      "answer": "yes",
+      "answered_by": "human",
+      "flagged": false,
+      "comment": ""
+    },
+    {
+      "question_id": "Q-0002",
+      "answer": "yes",
+      "answered_by": "human",
+      "flagged": false,
+      "comment": ""
+    }
+  ],
+  "comments": {},
+  "source": "human",
+  "at": "2026-09-03T23:14:00.891739Z"
+}

@@ -1,0 +1,250 @@
+{
+  "$defs": {
+    "AgentSpec": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "depends_on": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Depends On",
+          "type": "array"
+        },
+        "tools": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tools",
+          "type": "array"
+        },
+        "config": {
+          "additionalProperties": true,
+          "title": "Config",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "role"
+      ],
+      "title": "AgentSpec",
+      "type": "object"
+    },
+    "BackendName": {
+      "enum": [
+        "anthropic",
+        "agent_sdk",
+        "litellm",
+        "claude_cli",
+        "codex_cli",
+        "fake"
+      ],
+      "title": "BackendName",
+      "type": "string"
+    },
+    "EvaluationSpec": {
+      "properties": {
+        "metric": {
+          "title": "Metric",
+          "type": "string"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "metric"
+      ],
+      "title": "EvaluationSpec",
+      "type": "object"
+    },
+    "Mode": {
+      "enum": [
+        "detailed",
+        "light",
+        "auto"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "RoleSpec": {
+      "description": "Which backend and model answer for a role, and how hard they think (rule 14).",
+      "properties": {
+        "backend": {
+          "$ref": "#/$defs/BackendName"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "effort": {
+          "default": "medium",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "title": "Effort",
+          "type": "string"
+        },
+        "thinking": {
+          "default": false,
+          "title": "Thinking",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "backend",
+        "model"
+      ],
+      "title": "RoleSpec",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "task_id": {
+      "title": "Task Id",
+      "type": "string"
+    },
+    "objective": {
+      "title": "Objective",
+      "type": "string"
+    },
+    "recipe": {
+      "title": "Recipe",
+      "type": "string"
+    },
+    "agents": {
+      "items": {
+        "$ref": "#/$defs/AgentSpec"
+      },
+      "title": "Agents",
+      "type": "array"
+    },
+    "inputs": {
+      "additionalProperties": true,
+      "title": "Inputs",
+      "type": "object"
+    },
+    "roles": {
+      "additionalProperties": {
+        "$ref": "#/$defs/RoleSpec"
+      },
+      "description": "role name -> backend/model/effort",
+      "title": "Roles",
+      "type": "object"
+    },
+    "swaps": {
+      "description": "(author_role, checker_role) pairs",
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Swaps",
+      "type": "array"
+    },
+    "require_cross_vendor": {
+      "default": true,
+      "title": "Require Cross Vendor",
+      "type": "boolean"
+    },
+    "mode": {
+      "$ref": "#/$defs/Mode",
+      "default": "light"
+    },
+    "rounds": {
+      "default": 2,
+      "maximum": 6,
+      "minimum": 1,
+      "title": "Rounds",
+      "type": "integer"
+    },
+    "max_runtime_minutes": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Runtime Minutes"
+    },
+    "max_tokens_total": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Tokens Total"
+    },
+    "max_llm_calls": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Llm Calls"
+    },
+    "evaluations": {
+      "items": {
+        "$ref": "#/$defs/EvaluationSpec"
+      },
+      "title": "Evaluations",
+      "type": "array"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    }
+  },
+  "required": [
+    "task_id",
+    "objective",
+    "recipe"
+  ],
+  "title": "TaskSpec",
+  "type": "object"
+}

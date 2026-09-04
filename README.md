@@ -29,7 +29,7 @@
 <a href="https://github.com/openai/codex"><img alt="OpenAI Codex CLI" src="https://img.shields.io/badge/OpenAI_Codex_CLI-backend-10a37f?style=flat-square"></a>
 </p>
 
-<p align="center"><a href="#workflow">Workflow</a> · <a href="#harness">Harness</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#quick-start">Quick start</a> · <a href="#license">License</a></p>
+<p align="center"><a href="#see-it-run">See it run</a> · <a href="#quick-start">Quick start</a> · <a href="#workflow">Workflow</a> · <a href="#harness">Harness</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#license">License</a></p>
 
 <p align="center">
 <a href="examples/code_builder/task.json"><img alt="example: task.json" src="https://img.shields.io/badge/example-task.json-30363d?style=flat-square"></a>
@@ -37,6 +37,62 @@
 </p>
 
 <p align="center"><i>Independent open-source project. Not affiliated with or endorsed by Anthropic or OpenAI.<br>Claude and Claude Code are trademarks of Anthropic; Codex and GPT are trademarks of OpenAI. Prefect, MLflow, Reflex, ruff, pyright and pytest belong to their owners.</i></p>
+
+## See it run
+
+One run, from the start page to the report, on claude-haiku-4-5 and gpt-5.4-mini in auto mode.
+
+<p align="center"><img src="docs/media/run.gif" alt="A run from the start page to the report" width="900"></p>
+
+<p align="center">
+<img src="docs/media/start-page.png" alt="The start page" width="440">
+<img src="docs/media/run-page.png" alt="The run page, mid-run" width="440">
+</p>
+
+## Quick start
+
+The coder is a Claude Code plugin. Install it once, then start a build from any session:
+
+```bash
+claude plugin install github:msoliman6/csmw_coder      # or: claude plugin install /path/to/csmw_coder
+```
+
+```text
+/csmw-coder:build      turns what the conversation established into a task and starts the run
+/csmw-coder:status     one line per run, newest first
+/csmw-coder:dashboard  the page's address, starting it if needed
+```
+
+`/csmw-coder:build` writes the task from the conversation, starts the run as its own process and
+answers with one line: the run's name, the page's address, the run's folder. Nothing else comes
+back into the session; the page is where the run is watched, and the report lands in the run's
+folder. Runs live under `~/.csmw/runs`, outside any project. The first build sets up the
+plugin's environment, which takes a few minutes once.
+
+The models: Claude Code as the author and OpenAI Codex as the adversarial checker, both through
+their CLIs on your logins, low effort, auto mode, one round. Change the defaults in
+`plugin/defaults.json`, or say what you want in the conversation before `/csmw-coder:build`.
+
+<details>
+<summary><b>Without the plugin</b> — the same run from a shell</summary>
+
+```bash
+just install          # a venv with the harness and this package
+just doctor           # the backends, the CLIs, the keys
+just run              # the example task live
+just dash             # the page at http://127.0.0.1:3007
+```
+
+The example task (`examples/code_builder/task.json`) builds a slug library.
+
+</details>
+
+**Cost.** The page prices a run's tokens on read from LiteLLM's model price map, which covers every
+provider and refreshes from the LiteLLM repo. A model the map does not know shows `$?`. To override
+a rate, put it in `prices.json` as US dollars per million tokens, input first, output second:
+`{"my-negotiated-model": [0.25, 2.0]}`. Cached input is billed at the map's cached rate.
+The figure is the API price of the tokens; a side run on `claude -p` or `codex exec` under a
+subscription login is not billed per token, and the page marks such an estimate "at API rates".
 
 ## Workflow
 
@@ -218,26 +274,6 @@ Code then checks that every cited id exists in the text the reviewer was shown, 
 its `F-` id, and only then writes the file.
 
 </details>
-
-## Quick start
-
-```bash
-just install          # a venv with the harness and this package
-just doctor           # the backends, the CLIs, the keys
-just walk             # every branch offline with fake models, zero tokens
-just run              # the example task live (claude -p as author, codex exec as checker)
-just dash             # the page at http://127.0.0.1:3007
-```
-
-The example task (`examples/code_builder/task.json`) builds a slug library. Runs live under
-`runs/` and are never committed.
-
-**Cost.** The page prices a run's tokens on read from LiteLLM's model price map, which covers every
-provider and refreshes from the LiteLLM repo. A model the map does not know shows `$?`. To override
-a rate, put it in `prices.json` as US dollars per million tokens, input first, output second:
-`{"my-negotiated-model": [0.25, 2.0]}`. Cached input is billed at the map's cached rate.
-The figure is the API price of the tokens; a side run on `claude -p` or `codex exec` under a
-subscription login is not billed per token, and the page marks such an estimate "at API rates".
 
 ## Origins
 
