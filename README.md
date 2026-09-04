@@ -233,9 +233,10 @@ just dash             # the page at http://127.0.0.1:3007
 The example task (`examples/code_builder/task.json`) builds a slug library. Runs live under
 `runs/` and are never committed.
 
-**Cost.** The page prices a run's tokens on read: `prices.json` maps a model id to its price in US
-dollars per million tokens, input first, output second. A model missing from the file shows `$?`
-until you add it. Cached input is billed as input, so the estimate rounds up, never down.
+**Cost.** The page prices a run's tokens on read from LiteLLM's model price map, which covers every
+provider and refreshes from the LiteLLM repo. A model the map does not know shows `$?`. To override
+a rate, put it in `prices.json` as US dollars per million tokens, input first, output second:
+`{"my-negotiated-model": [0.25, 2.0]}`. Cached input is billed at the map's cached rate.
 
 ## Origins
 
