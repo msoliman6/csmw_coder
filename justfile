@@ -1,8 +1,8 @@
-# csmw_coder: the code-builder workflow on the code_steer_model_write harness
+# csmw_coder: the code-builder workflow
 
 set shell := ["bash", "-cu"]
 
-# the harness from the sibling checkout, then this package, both editable
+# the harness, then this package, both editable
 install:
     python3 -m venv .venv && .venv/bin/pip install -q -e ../code_steer_model_write -e '.[dev]'
 

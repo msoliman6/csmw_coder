@@ -32,15 +32,13 @@
 <p align="center"><a href="#workflow">Workflow</a> · <a href="#harness">Harness</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#quick-start">Quick start</a> · <a href="#license">License</a></p>
 
 <p align="center">
-<a href="https://github.com/msoliman6/code_steer_model_write"><img alt="docs: the template" src="https://img.shields.io/badge/docs-the%20template-30363d?style=flat-square"></a>
-<a href="https://github.com/msoliman6/code_steer_model_write/blob/main/docs/PLAN.md"><img alt="docs: the plan" src="https://img.shields.io/badge/docs-the%20plan-30363d?style=flat-square"></a>
 <a href="examples/code_builder/task.json"><img alt="example: task.json" src="https://img.shields.io/badge/example-task.json-30363d?style=flat-square"></a>
 <a href="csmw_coder/workflow.py"><img alt="workflow: workflow.py" src="https://img.shields.io/badge/workflow-workflow.py-30363d?style=flat-square"></a>
 </p>
 
 <p align="center"><i>Independent open-source project. Not affiliated with or endorsed by Anthropic or OpenAI.<br>Claude and Claude Code are trademarks of Anthropic; Codex and GPT are trademarks of OpenAI. Prefect, MLflow, Reflex, ruff, pyright and pytest belong to their owners.</i></p>
 
-The **code-builder** workflow on the [code_steer_model_write](https://github.com/msoliman6/code_steer_model_write) harness: two model sides
+The **code-builder** workflow: two model sides
 of different vendors build a Python module through a plan, a frozen contract, a verification
 design, an isolated build and a verification run, with code deciding every step.
 
@@ -239,8 +237,7 @@ its `F-` id, and only then writes the file.
 ## Quick start
 
 ```bash
-git clone git@github.com:msoliman6/code_steer_model_write.git ../code_steer_model_write
-just install          # a venv with the harness and this package, both editable
+just install          # a venv with the harness and this package
 just doctor           # the backends, the CLIs, the keys
 just walk             # every branch offline with fake models, zero tokens
 just run              # the example task live (claude -p as author, codex exec as checker)

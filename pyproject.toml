@@ -5,12 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "csmw_coder"
 version = "0.1.0"
-description = "The code-builder workflow on the code_steer_model_write harness (code steers, models write)."
+description = "The code-builder workflow: two model sides of different vendors build a Python module, with code deciding every step."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-# the harness, installed first from its checkout: pip install -e ../code_steer_model_write -e .
-# (a private repo, so no URL here; `just install` does both)
+# the harness, installed first (`just install` does both)
 dependencies = ["code_steer_model_write"]
 
 [project.optional-dependencies]

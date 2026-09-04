@@ -1,4 +1,4 @@
-"""Rule 12: every leg green offline before a token is spent. The template's walk runs the legs
+"""Rule 12: every leg green offline before a token is spent. The harness's walk runs the legs
 this package registers."""
 
 from code_steer_model_write import walk
