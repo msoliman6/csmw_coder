@@ -38,10 +38,6 @@
 
 <p align="center"><i>Independent open-source project. Not affiliated with or endorsed by Anthropic or OpenAI.<br>Claude and Claude Code are trademarks of Anthropic; Codex and GPT are trademarks of OpenAI. Prefect, MLflow, Reflex, ruff, pyright and pytest belong to their owners.</i></p>
 
-The **code-builder** workflow: two model sides
-of different vendors build a Python module through a plan, a frozen contract, a verification
-design, an isolated build and a verification run, with code deciding every step.
-
 ## Workflow
 
 The block diagram of this workflow, generated from its definition (`just figure`): what each stage
