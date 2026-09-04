@@ -45,4 +45,6 @@ The example task (`examples/code_builder/task.json`) builds a slug library. Runs
 
 ## Status
 
-`status: proven` on the template's live pass of 2026-09-03 (`claude-haiku-4-5` + `gpt-5.4-mini`).
+`status: proven`: one clean live pass from this repo on 2026-09-04 (`live-2`: 23 steps, no halt, no
+refusal, no resume; `claude-haiku-4-5` + `gpt-5.4-mini`, low effort, auto, one round), after the
+template's pass of 2026-09-03. The verdict of that run carried 7 items; a verdict is a result, not a bug.
