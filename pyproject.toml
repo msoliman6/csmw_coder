@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "csmw_coder"
+version = "0.1.0"
+description = "The code-builder workflow: a recipe package for code_steer_model_write (code steers, models write)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+# the harness; for local work: pip install -e ../code_steer_model_write -e .
+dependencies = ["code_steer_model_write @ git+ssh://git@github.com/msoliman6/code_steer_model_write.git"]
+
+[project.optional-dependencies]
+dev = ["ruff>=0.5", "pyright>=1.1", "pytest>=8", "pytest-json-report>=1.5", "jsonschema>=4"]
+
+# the template discovers the recipe and its walk legs here; nothing in the template names them
+[project.entry-points."csmw.recipes"]
+code_builder = "csmw_coder.recipe:CodeBuilder"
+
+[project.entry-points."csmw.walk_legs"]
+code_builder = "csmw_coder.walk_legs:LEGS"
+
+[tool.setuptools.packages.find]
+include = ["csmw_coder*"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
