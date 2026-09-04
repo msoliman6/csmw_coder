@@ -15,8 +15,6 @@ import tempfile
 from pathlib import Path
 from typing import Any, Callable
 
-from pydantic import BaseModel, Field
-
 from code_steer_model_write.artifacts.brief import Brief
 from code_steer_model_write.artifacts.contract import Contract
 from code_steer_model_write.artifacts.files import FilesAuthor
@@ -35,13 +33,22 @@ from code_steer_model_write.checks.runtests import run_all
 from code_steer_model_write.driver.steps import ProgramContext, Step, StepKind
 from code_steer_model_write.gates.gate import GateBuilder, read_decision
 from code_steer_model_write.ids import Prefix, next_id
+from code_steer_model_write.recipes.base import (
+    CheckKind,
+    EvalSpec,
+    FigurePhrases,
+    GateSpec,
+    Recipe,
+    RecipeSpec,
+    StageSpec,
+)
 from code_steer_model_write.review.rounds import ReviewLoop
 from code_steer_model_write.spec.base import Artifact
 from code_steer_model_write.spec.decisions import Gate, Question
 from code_steer_model_write.spec.findings import Arbitrated, Findings
 from code_steer_model_write.state.lock import atomic_write_text
 from code_steer_model_write.state.run import CarriedRecord, RunPaths, RunState
-from code_steer_model_write.recipes.base import CheckKind, EvalSpec, FigurePhrases, GateSpec, Recipe, RecipeSpec, StageSpec
+from pydantic import BaseModel, Field
 
 ROOT = Path(__file__).resolve().parents[1]
 

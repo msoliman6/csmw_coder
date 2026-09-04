@@ -52,5 +52,3 @@ def test_light_figure_is_flat_and_both_themes_render():
 def test_actor_names_are_parameters():
     svg = figure_svg("code_builder", "dark", names={"a": "Sonnet", "b": "GPT"})
     assert "Sonnet writes the plan" in svg and "GPT attacks it" in svg and "Claude" not in svg
-
-

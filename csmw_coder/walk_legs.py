@@ -22,6 +22,7 @@ from code_steer_model_write.walk import (
     write_decision,
 )
 
+
 def leg_happy(tmp: Path) -> str:
     paths, recipe, task = start("code_builder", tmp / "run")
     out = make_runner(paths, recipe, task).drive()
@@ -41,6 +42,7 @@ def leg_happy(tmp: Path) -> str:
     assert st.completed_at is not None
     return f"{len(st.steps)} steps, {len(res['properties'])} properties pass, 0 halts"
 
+
 def leg_refuse_recover(tmp: Path) -> str:
     with env(FAKE_REFUSE="author:2"):
         paths, recipe, task = start("code_builder", tmp / "run")
@@ -56,6 +58,7 @@ def leg_refuse_recover(tmp: Path) -> str:
             assert prior and prior[-1].data["problems"] == []
     return f"{len(refused)} refusals re-asked, then recovered"
 
+
 def leg_no_progress_halts_then_resume(tmp: Path) -> str:
     with env(FAKE_REFUSE="author:same"):
         paths, recipe, task = start("code_builder", tmp / "run")
@@ -69,6 +72,7 @@ def leg_no_progress_halts_then_resume(tmp: Path) -> str:
     st = RunState.load(paths)
     assert st.resumed_count == 1 and st.last_halt and st.last_halt.startswith("HALT at ")
     return f"halted at {h.step}, resumed, completed"
+
 
 def leg_findings_rounds_and_closing(tmp: Path) -> str:
     with env(FAKE_FINDINGS="checker:2:major"):
@@ -85,6 +89,7 @@ def leg_findings_rounds_and_closing(tmp: Path) -> str:
     assert len(ids) == len(set(ids))
     return f"{len(filed)} findings filed, {len(decided)} decided, {len(rounds)} rounds closed"
 
+
 def leg_closing_carries(tmp: Path) -> str:
     with env(FAKE_FINDINGS="checker:1:minor", FAKE_CLOSING="finding"):
         paths, recipe, task = start("code_builder", tmp / "run", rounds=1)
@@ -96,6 +101,7 @@ def leg_closing_carries(tmp: Path) -> str:
     assert any(c["kind"] == "finding" for c in rep["carried"]), rep["carried"]
     assert "carried" in (paths.run_dir / "REPORT.md").read_text().lower()
     return f"{len(rep['carried'])} carried into the report"
+
 
 def leg_buggy_impl_triage_fix(tmp: Path) -> str:
     with env(FAKE_IMPL="buggy"):
@@ -112,6 +118,7 @@ def leg_buggy_impl_triage_fix(tmp: Path) -> str:
     assert all(p["real"] == "pass" for p in v2["properties"]), v2
     return f"{len(failing)} failing -> q1 test_stands -> q2 implementation_bug -> fixed -> pass"
 
+
 def leg_test_bug_route(tmp: Path) -> str:
     with env(FAKE_IMPL="buggy", FAKE_VERDICT="author:test_bug"):
         paths, recipe, task = start("code_builder", tmp / "run")
@@ -121,6 +128,7 @@ def leg_test_bug_route(tmp: Path) -> str:
     assert verdicts and set(verdicts) == {"test_bug"}, verdicts
     assert any(k.startswith("p4-fix-tests") for k in RunState.load(paths).steps)
     return "q1 test_bug -> the checker fixed the tests -> re-run"
+
 
 def leg_ambiguity_carried(tmp: Path) -> str:
     with env(FAKE_IMPL="buggy", FAKE_VERDICT="checker:contract_ambiguity"):
@@ -132,6 +140,7 @@ def leg_ambiguity_carried(tmp: Path) -> str:
     assert not any(k.startswith("p4-fix") for k in RunState.load(paths).steps)
     return "q2 contract_ambiguity -> carried as a result, nothing fixed"
 
+
 def leg_gate_revise(tmp: Path) -> str:
     with env(FAKE_REVISE="blocks:1"):
         paths, recipe, task = start("code_builder", tmp / "run")
@@ -141,6 +150,7 @@ def leg_gate_revise(tmp: Path) -> str:
     assert "p1-contract-revise-r1" in keys and "p1-gate-blocks-r2" in keys, keys
     assert (paths.artifacts / "contract" / "v002.json").exists(), "the revision was not a new version"
     return "blocks gate sent back once -> revise -> asked again -> proceed"
+
 
 def leg_light_mode_waits_then_human(tmp: Path) -> str:
     paths, recipe, task = start("code_builder", tmp / "run", mode=Mode.LIGHT)
