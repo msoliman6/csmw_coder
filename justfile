@@ -25,3 +25,4 @@ dash:
 
 figure:
     .venv/bin/csmw figure code_builder --theme dark -o docs/media/workflow-dark.svg && .venv/bin/csmw figure code_builder --theme light -o docs/media/workflow.svg
+    .venv/bin/csmw figure harness --theme dark -o docs/media/harness-dark.svg && .venv/bin/csmw figure harness --theme light -o docs/media/harness.svg

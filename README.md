@@ -13,10 +13,64 @@ workflow runs and is installed as a dependency; the recipe registers itself thro
 `csmw.recipes` entry point, so the template's CLI, start page and run page find it without
 naming it.
 
+## The workflow
+
+The block diagram of this workflow, generated from the recipe (`just figure`): what each stage
+does, who writes and who attacks, where code freezes, merges and runs.
+
 <p align="center"><picture>
 <source media="(prefers-color-scheme: dark)" srcset="docs/media/workflow-dark.svg">
 <img src="docs/media/workflow.svg" alt="How the code-builder workflow operates" width="820">
 </picture></p>
+
+## The harness
+
+The harness operates on top of the workflow: the workflow figure above is the top box of this
+one. The harness is the template's; this repo only supplies the workflow. The agent workflow is Python; it feeds Prefect and MLflow through their SDKs; both feed
+`monitor.db`; Reflex is the human control plane; the custom dashboard is what you look at.
+
+<p align="center"><picture>
+<source media="(prefers-color-scheme: dark)" srcset="docs/media/harness-dark.svg">
+<img src="docs/media/harness.svg" alt="How the runtime is wired" width="760">
+</picture></p>
+
+### Clean responsibility split
+
+| system | owns |
+|---|---|
+| **Prefect** | workflow execution · task dependencies · retries · scheduling · cancellation · run/task state |
+| **MLflow** | agent / LLM traces · spans · tool calls · retrieval traces · token / cost / latency · workflow / agent evaluation · scientific / ML experiments · parameters / metrics · artifacts / models |
+| **monitor.db** | dashboard-only state · live human-readable progress · current activity · UI metadata · graph layout / positions |
+| **Reflex** | human control plane · create tasks · launch / cancel runs · live dashboard · inspect traces · inspect experiments · inspect evaluations |
+
+The main rule:
+
+```text
+workflow/task state  -> Prefect
+agent behavior       -> MLflow traces
+experiment results   -> MLflow experiments
+UI-only state        -> monitor.db
+human interaction    -> Reflex
+```
+
+Do not log the same data into all systems.
+
+### Shared workflow id
+
+Every subsystem receives the same application-level id, and the dashboard joins on it:
+
+```text
+workflow_run_id = "run_123"
+   |
+   +-- Prefect -----> What is executing?
+   +-- MLflow ------> What did the agents do? How did the experiment perform?
+   +-- monitor.db --> What UI-specific state should be displayed?
+```
+
+In this template the id is the run's folder name under `runs/`; `state.json` and `events.jsonl`
+in that folder are the one owner of status and history, and Prefect, MLflow and `monitor.db` are
+fed from them (rule 4, one owner per fact).
+
 
 ## Run it
 
