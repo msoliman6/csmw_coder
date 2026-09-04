@@ -29,7 +29,7 @@
 <a href="https://github.com/openai/codex"><img alt="OpenAI Codex CLI" src="https://img.shields.io/badge/OpenAI_Codex_CLI-backend-10a37f?style=flat-square"></a>
 </p>
 
-<p align="center"><a href="#the-workflow">The workflow</a> · <a href="#the-harness">The harness</a> · <a href="#run-it">Run it</a> · <a href="#layout">Layout</a> · <a href="#status">Status</a></p>
+<p align="center"><a href="#workflow">Workflow</a> · <a href="#harness">Harness</a> · <a href="#quick-start">Quick start</a> · <a href="#license">License</a></p>
 
 <p align="center">
 <a href="https://github.com/msoliman6/code_steer_model_write"><img alt="docs: the template" src="https://img.shields.io/badge/docs-the%20template-30363d?style=flat-square"></a>
@@ -45,13 +45,7 @@ The **code-builder** workflow as a recipe package for
 of different vendors build a Python module through a plan, a frozen contract, a verification
 design, an isolated build and a verification run, with code deciding every step.
 
-This repo owns *what* the workflow is: the recipe (`csmw_coder/recipe.py`), its fake answers for
-the offline walk, its prompts, its example task and its walk legs. The template owns *how* any
-workflow runs and is installed as a dependency; the recipe registers itself through the
-`csmw.recipes` entry point, so the template's CLI, start page and run page find it without
-naming it.
-
-## The workflow
+## Workflow
 
 The block diagram of this workflow, generated from the recipe (`just figure`): what each stage
 does, who writes and who attacks, where code freezes, merges and runs.
@@ -61,10 +55,10 @@ does, who writes and who attacks, where code freezes, merges and runs.
 <img src="docs/media/workflow.svg" alt="How the code-builder workflow operates" width="820">
 </picture></p>
 
-## The harness
+## Harness
 
 The harness operates on top of the workflow: the workflow figure above is the top box of this
-one. The harness is the template's; this repo only supplies the workflow. The agent workflow is Python; it feeds Prefect and MLflow through their SDKs; both feed
+one. The agent workflow is Python; it feeds Prefect and MLflow through their SDKs; both feed
 `monitor.db`; Reflex is the human control plane; the custom dashboard is what you look at.
 
 <p align="center"><picture>
@@ -81,18 +75,6 @@ one. The harness is the template's; this repo only supplies the workflow. The ag
 | **monitor.db** | dashboard-only state · live human-readable progress · current activity · UI metadata · graph layout / positions |
 | **Reflex** | human control plane · create tasks · launch / cancel runs · live dashboard · inspect traces · inspect experiments · inspect evaluations |
 
-The main rule:
-
-```text
-workflow/task state  -> Prefect
-agent behavior       -> MLflow traces
-experiment results   -> MLflow experiments
-UI-only state        -> monitor.db
-human interaction    -> Reflex
-```
-
-Do not log the same data into all systems.
-
 ### Shared workflow id
 
 Every subsystem receives the same application-level id, and the dashboard joins on it:
@@ -105,12 +87,9 @@ workflow_run_id = "run_123"
    +-- monitor.db --> What UI-specific state should be displayed?
 ```
 
-In this template the id is the run's folder name under `runs/`; `state.json` and `events.jsonl`
-in that folder are the one owner of status and history, and Prefect, MLflow and `monitor.db` are
-fed from them (rule 4, one owner per fact).
 
 
-## Run it
+## Quick start
 
 ```bash
 git clone git@github.com:msoliman6/code_steer_model_write.git ../code_steer_model_write
@@ -124,19 +103,6 @@ just dash             # the page at http://127.0.0.1:3007
 The example task (`examples/code_builder/task.json`) builds a slug library. Runs live under
 `runs/` and are never committed.
 
-## Layout
+## License
 
-| path | what |
-|---|---|
-| `csmw_coder/recipe.py` | the `CodeBuilder` recipe: stages, steps derived from disk, checks, gates |
-| `csmw_coder/fake.py` | fake answers per schema for the offline walk |
-| `csmw_coder/walk_legs.py` | the ten legs the walk runs, one per branch |
-| `prompts/code_builder/` | the code-filled prompt templates |
-| `examples/code_builder/task.json` | the example TaskSpec |
-| `docs/media/workflow*.svg` | the workflow figure, generated from the recipe (`just figure`) |
-
-## Status
-
-`status: proven`: one clean live pass from this repo on 2026-09-04 (`live-2`: 23 steps, no halt, no
-refusal, no resume; `claude-haiku-4-5` + `gpt-5.4-mini`, low effort, auto, one round), after the
-template's pass of 2026-09-03. The verdict of that run carried 7 items; a verdict is a result, not a bug.
+MIT.
