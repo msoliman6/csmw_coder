@@ -237,6 +237,8 @@ The example task (`examples/code_builder/task.json`) builds a slug library. Runs
 provider and refreshes from the LiteLLM repo. A model the map does not know shows `$?`. To override
 a rate, put it in `prices.json` as US dollars per million tokens, input first, output second:
 `{"my-negotiated-model": [0.25, 2.0]}`. Cached input is billed at the map's cached rate.
+The figure is the API price of the tokens; a side run on `claude -p` or `codex exec` under a
+subscription login is not billed per token, and the page marks such an estimate "at API rates".
 
 ## Origins
 
