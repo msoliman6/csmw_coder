@@ -29,7 +29,7 @@
 <a href="https://github.com/openai/codex"><img alt="OpenAI Codex CLI" src="https://img.shields.io/badge/OpenAI_Codex_CLI-backend-10a37f?style=flat-square"></a>
 </p>
 
-<p align="center"><a href="#workflow">Workflow</a> · <a href="#harness">Harness</a> · <a href="#quick-start">Quick start</a> · <a href="#license">License</a></p>
+<p align="center"><a href="#workflow">Workflow</a> · <a href="#harness">Harness</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#quick-start">Quick start</a> · <a href="#license">License</a></p>
 
 <p align="center">
 <a href="https://github.com/msoliman6/code_steer_model_write"><img alt="docs: the template" src="https://img.shields.io/badge/docs-the%20template-30363d?style=flat-square"></a>
@@ -89,6 +89,150 @@ workflow_run_id = "run_123"
    +-- MLflow ------> What did the agents do? How did the experiment perform?
    +-- monitor.db --> What UI-specific state should be displayed?
 ```
+
+</details>
+
+## How the models are held
+
+The rules below are the ones this workflow leans on, taken from the harness's fourteen.
+
+- **Every model answer is constrained decoding against one schema.** Each call carries one pydantic
+  schema; the backend enforces it at generation (Anthropic and Codex grammars, the Agent SDK's tool
+  boundary) and pydantic validates it again. A model never writes prose into the run, only a JSON
+  object of the declared shape.
+- **Agents read markdown that code rendered from JSON.** No model is handed a file path, raw JSON or
+  another model's prose; code renders every input and inlines it into the prompt.
+- **Tools, files and shell are granted by need, never by default.** A step that needs them declares
+  it, and then only inside the folder the agent writes its output to; every other step is issued with
+  no tools at all, stated in the prompt and enforced by the harness.
+- **No agent grades its own work.** The checker attacks a frozen copy, from a different vendor.
+- **Every element has a code-assigned id, never renumbered.** Findings cite ids, so coverage is a set
+  difference, not a judgment.
+- **Nothing is recorded from a refused answer.** A refusal is re-asked with the exact problems and the
+  refused answer, at most six times, stopping when the problem set repeats.
+- **Every loop is bounded by code and carries its full trajectory.** Convergence is computed; the
+  unresolved is carried into the report, never hidden.
+- **Proven offline first.** Fake models walk every branch with zero tokens before a live run.
+- **Tokens are the honest measure.** Dollars are a lookup on read, blank until the price is known.
+
+<details>
+<summary><b>A schema, as the model receives it</b> — the review round's answer</summary>
+
+Generated from the pydantic class by `wire_schema()`: every field required, no extra keys, ranges
+kept in validators rather than the grammar.
+
+```json
+{
+  "$defs": {
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "cites": {
+          "description": "the ids this finding is about (they must exist)",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "description": "gap: the input itself is silent on this; routes to the human",
+          "enum": [
+            "finding",
+            "gap"
+          ],
+          "type": "string"
+        },
+        "klass": {
+          "$ref": "#/$defs/Klass"
+        },
+        "argument": {
+          "description": "why, engaging the cited text; a reader can check it",
+          "type": "string"
+        }
+      },
+      "required": [
+        "severity",
+        "cites",
+        "kind",
+        "klass",
+        "argument"
+      ],
+      "type": "object"
+    },
+    "Klass": {
+      "description": "The reconcile class (after addyosmani's agent-skills): what kind of thing a finding is.\nPrecedence when a finding could be two: contract_misread > actionable > tradeoff > noise.",
+      "enum": [
+        "contract_misread",
+        "actionable",
+        "tradeoff",
+        "noise"
+      ],
+      "type": "string"
+    },
+    "Severity": {
+      "enum": [
+        "blocking",
+        "major",
+        "minor"
+      ],
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A review round's answer. Empty `findings` with APPROVED is allowed (rule 9: the empty\nset is a valid answer); zero findings after several rounds is weak evidence, and the\nreviewer prompt says so.",
+  "properties": {
+    "findings": {
+      "description": "empty means you found nothing",
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "type": "array"
+    },
+    "verdict": {
+      "description": "REVISE iff at least one finding is filed",
+      "enum": [
+        "APPROVED",
+        "REVISE"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "findings",
+    "verdict"
+  ],
+  "type": "object",
+  "title": "Findings"
+}
+```
+
+</details>
+
+<details>
+<summary><b>An answer that passes</b></summary>
+
+```json
+{
+  "findings": [
+    {
+      "severity": "major",
+      "cites": [
+        "C-0007"
+      ],
+      "kind": "finding",
+      "klass": "actionable",
+      "argument": "C-0007 keeps alphanumeric content in order but says nothing about an input that is only separators; two implementers resolve it two ways."
+    }
+  ],
+  "verdict": "REVISE"
+}
+```
+
+Code then checks that every cited id exists in the text the reviewer was shown, assigns the finding
+its `F-` id, and only then writes the file.
 
 </details>
 
