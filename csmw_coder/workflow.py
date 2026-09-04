@@ -1,4 +1,4 @@
-"""The code-builder recipe: plan -> contract -> freeze -> verification design by the other side
+"""The code-builder workflow: plan -> contract -> freeze -> verification design by the other side
 -> tests by one side, source by the other -> null run -> verify -> triage -> report.
 
 Every step is derived from the files in the run dir (rule 1). Roles: `author` (side A: plan,

@@ -24,8 +24,8 @@ from code_steer_model_write.walk import (
 
 
 def leg_happy(tmp: Path) -> str:
-    paths, recipe, task = start("code_builder", tmp / "run")
-    out = make_runner(paths, recipe, task).drive()
+    paths, wf, task = start("code_builder", tmp / "run")
+    out = make_runner(paths, wf, task).drive()
     assert out is Outcome.COMPLETED, f"outcome {out}: {Halt.read(paths)}"
     st = RunState.load(paths)
     ks = kinds(paths)
@@ -45,8 +45,8 @@ def leg_happy(tmp: Path) -> str:
 
 def leg_refuse_recover(tmp: Path) -> str:
     with env(FAKE_REFUSE="author:2"):
-        paths, recipe, task = start("code_builder", tmp / "run")
-        out = make_runner(paths, recipe, task).drive()
+        paths, wf, task = start("code_builder", tmp / "run")
+        out = make_runner(paths, wf, task).drive()
     assert out is Outcome.COMPLETED, Halt.read(paths)
     refused = [e for e in events(paths) if e.kind == "step.refused"]
     assert refused and all(e.role == "author" for e in refused)
@@ -61,13 +61,13 @@ def leg_refuse_recover(tmp: Path) -> str:
 
 def leg_no_progress_halts_then_resume(tmp: Path) -> str:
     with env(FAKE_REFUSE="author:same"):
-        paths, recipe, task = start("code_builder", tmp / "run")
-        out = make_runner(paths, recipe, task).drive()
+        paths, wf, task = start("code_builder", tmp / "run")
+        out = make_runner(paths, wf, task).drive()
     h = Halt.read(paths)
     assert (
         out is Outcome.HALTED_HONESTLY and h and h.reason.value == "refused" and "same problems" in h.message
     ), h
-    out2 = make_runner(paths, recipe, task).drive()
+    out2 = make_runner(paths, wf, task).drive()
     assert out2 is Outcome.COMPLETED, Halt.read(paths)
     st = RunState.load(paths)
     assert st.resumed_count == 1 and st.last_halt and st.last_halt.startswith("HALT at ")
@@ -76,8 +76,8 @@ def leg_no_progress_halts_then_resume(tmp: Path) -> str:
 
 def leg_findings_rounds_and_closing(tmp: Path) -> str:
     with env(FAKE_FINDINGS="checker:2:major"):
-        paths, recipe, task = start("code_builder", tmp / "run", rounds=2)
-        out = make_runner(paths, recipe, task).drive()
+        paths, wf, task = start("code_builder", tmp / "run", rounds=2)
+        out = make_runner(paths, wf, task).drive()
     assert out is Outcome.COMPLETED, Halt.read(paths)
     filed = [e for e in events(paths) if e.kind == "finding.filed"]
     decided = [e for e in events(paths) if e.kind == "finding.decided"]
@@ -92,8 +92,8 @@ def leg_findings_rounds_and_closing(tmp: Path) -> str:
 
 def leg_closing_carries(tmp: Path) -> str:
     with env(FAKE_FINDINGS="checker:1:minor", FAKE_CLOSING="finding"):
-        paths, recipe, task = start("code_builder", tmp / "run", rounds=1)
-        out = make_runner(paths, recipe, task).drive()
+        paths, wf, task = start("code_builder", tmp / "run", rounds=1)
+        out = make_runner(paths, wf, task).drive()
     assert out is Outcome.COMPLETED, Halt.read(paths)
     carried = [e for e in events(paths) if e.kind == "round.closed" and e.data.get("carried")]
     assert carried, "the closing read's finding was not carried"
@@ -105,8 +105,8 @@ def leg_closing_carries(tmp: Path) -> str:
 
 def leg_buggy_impl_triage_fix(tmp: Path) -> str:
     with env(FAKE_IMPL="buggy"):
-        paths, recipe, task = start("code_builder", tmp / "run")
-        out = make_runner(paths, recipe, task).drive()
+        paths, wf, task = start("code_builder", tmp / "run")
+        out = make_runner(paths, wf, task).drive()
     assert out is Outcome.COMPLETED, Halt.read(paths)
     v1 = json.loads((paths.artifacts / "results" / "v001.json").read_text())
     failing = [p for p in v1["properties"] if p["real"] != "pass"]
@@ -121,8 +121,8 @@ def leg_buggy_impl_triage_fix(tmp: Path) -> str:
 
 def leg_test_bug_route(tmp: Path) -> str:
     with env(FAKE_IMPL="buggy", FAKE_VERDICT="author:test_bug"):
-        paths, recipe, task = start("code_builder", tmp / "run")
-        out = make_runner(paths, recipe, task).drive()
+        paths, wf, task = start("code_builder", tmp / "run")
+        out = make_runner(paths, wf, task).drive()
     assert out is Outcome.COMPLETED, Halt.read(paths)
     verdicts = [e.data["verdict"] for e in events(paths) if e.kind == "judge.verdict"]
     assert verdicts and set(verdicts) == {"test_bug"}, verdicts
@@ -132,8 +132,8 @@ def leg_test_bug_route(tmp: Path) -> str:
 
 def leg_ambiguity_carried(tmp: Path) -> str:
     with env(FAKE_IMPL="buggy", FAKE_VERDICT="checker:contract_ambiguity"):
-        paths, recipe, task = start("code_builder", tmp / "run")
-        out = make_runner(paths, recipe, task).drive()
+        paths, wf, task = start("code_builder", tmp / "run")
+        out = make_runner(paths, wf, task).drive()
     assert out is Outcome.COMPLETED, Halt.read(paths)
     rep = json.loads((paths.artifacts / "report" / "v001.json").read_text())
     assert any(c["kind"] == "ambiguity" for c in rep["carried"]), rep["carried"]
@@ -143,8 +143,8 @@ def leg_ambiguity_carried(tmp: Path) -> str:
 
 def leg_gate_revise(tmp: Path) -> str:
     with env(FAKE_REVISE="blocks:1"):
-        paths, recipe, task = start("code_builder", tmp / "run")
-        out = make_runner(paths, recipe, task).drive()
+        paths, wf, task = start("code_builder", tmp / "run")
+        out = make_runner(paths, wf, task).drive()
     assert out is Outcome.COMPLETED, Halt.read(paths)
     keys = list(RunState.load(paths).steps)
     assert "p1-contract-revise-r1" in keys and "p1-gate-blocks-r2" in keys, keys
@@ -153,8 +153,8 @@ def leg_gate_revise(tmp: Path) -> str:
 
 
 def leg_light_mode_waits_then_human(tmp: Path) -> str:
-    paths, recipe, task = start("code_builder", tmp / "run", mode=Mode.LIGHT)
-    out = make_runner(paths, recipe, task, gate_timeout=0.3).drive()
+    paths, wf, task = start("code_builder", tmp / "run", mode=Mode.LIGHT)
+    out = make_runner(paths, wf, task, gate_timeout=0.3).drive()
     assert out is Outcome.HALTED_HONESTLY and Halt.read(paths).step == "p0-gate-ledger", Halt.read(paths)
     asked = [e for e in events(paths) if e.kind == "gate.asked"]
     assert asked and asked[0].data["needs_human"] is True
@@ -178,7 +178,7 @@ def leg_light_mode_waits_then_human(tmp: Path) -> str:
             ),
         )
         answered.append(gid)
-        out = make_runner(paths, recipe, task, gate_timeout=0.3).drive()
+        out = make_runner(paths, wf, task, gate_timeout=0.3).drive()
     assert out is Outcome.COMPLETED, Halt.read(paths)
     rows = json.loads(paths.decisions.read_text())
     assert rows[0]["answered_by"] == "human" and not rows[0]["flagged"]

@@ -1,4 +1,4 @@
-"""The workflow figure is generated from the recipe and pinned to the reference geometry (template plan §7b)."""
+"""The workflow figure is generated from the workflow definition and pinned to the reference geometry."""
 
 import re
 from pathlib import Path

@@ -1,1 +1,1 @@
-"""csmw_coder: the code-builder workflow, a recipe package for code_steer_model_write."""
+"""csmw_coder: the code-builder workflow on the code_steer_model_write harness."""

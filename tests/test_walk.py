@@ -5,8 +5,8 @@ from code_steer_model_write import walk
 from code_steer_model_write.recipes import registry
 
 
-def test_the_recipe_is_the_installed_one():
-    from csmw_coder.recipe import CodeBuilder
+def test_the_workflow_is_the_installed_one():
+    from csmw_coder.workflow import CodeBuilder
 
     assert isinstance(registry.get("code_builder"), CodeBuilder)
     assert "code_builder" in registry.walk_legs()

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "csmw_coder"
 version = "0.1.0"
-description = "The code-builder workflow: a recipe package for code_steer_model_write (code steers, models write)."
+description = "The code-builder workflow on the code_steer_model_write harness (code steers, models write)."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -16,9 +16,9 @@ dependencies = ["code_steer_model_write"]
 [project.optional-dependencies]
 dev = ["ruff>=0.5", "pyright>=1.1", "pytest>=8", "pytest-json-report>=1.5", "jsonschema>=4"]
 
-# the template discovers the recipe and its walk legs here; nothing in the template names them
+# the harness discovers the workflow and its walk legs here; nothing in the harness names them
 [project.entry-points."csmw.recipes"]
-code_builder = "csmw_coder.recipe:CodeBuilder"
+code_builder = "csmw_coder.workflow:CodeBuilder"
 
 [project.entry-points."csmw.walk_legs"]
 code_builder = "csmw_coder.walk_legs:LEGS"

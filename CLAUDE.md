@@ -9,4 +9,4 @@ apply here unchanged.
 - Never edit `csmw_coder/` while a run lives under `runs/`.
 - A bug is classified against the template's BUG-LEDGER classes before it is fixed; a mechanism
   that belongs to the harness is fixed in the template, never patched around here.
-- The recipe registers itself by entry point (`pyproject.toml`); the template must never name it.
+- The workflow registers itself by entry point (`pyproject.toml`); the harness must never name it.
