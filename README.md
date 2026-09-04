@@ -88,25 +88,16 @@ workflow_run_id = "run_123"
 
 ## How the models are held
 
-The rules below are the ones this workflow leans on, taken from the harness's fourteen.
-
-- **Every model answer is constrained decoding against one schema.** Each call carries one pydantic
-  schema; the backend enforces it at generation (Anthropic and Codex grammars, the Agent SDK's tool
-  boundary) and pydantic validates it again. A model never writes prose into the run, only a JSON
-  object of the declared shape.
-- **Agents read markdown that code rendered from JSON.** No model is handed a file path, raw JSON or
-  another model's prose; code renders every input and inlines it into the prompt.
-- **Tools, files and shell are granted by need, never by default.** A step that needs them declares
-  it, and then only inside the folder the agent writes its output to; every other step is issued with
-  no tools at all, stated in the prompt and enforced by the harness.
-- **No agent grades its own work.** The checker attacks a frozen copy, from a different vendor.
-- **Every element has a code-assigned id, never renumbered.** Findings cite ids, so coverage is a set
-  difference, not a judgment.
-- **Nothing is recorded from a refused answer.** A refusal is re-asked with the exact problems and the
-  refused answer, at most six times, stopping when the problem set repeats.
-- **Every loop is bounded by code and carries its full trajectory.** Convergence is computed; the
-  unresolved is carried into the report, never hidden.
-- **Tokens are the honest measure.** Dollars are a lookup on read, blank until the price is known.
+| What holds | How |
+|---|---|
+| One schema per call, decoded under constraint | the backend's grammar at generation, pydantic again on receipt |
+| Models read markdown, never files or raw JSON | code renders every input and inlines it |
+| Tools, files and shell only when a step declares them, only in its output folder | stated in the prompt, enforced by the harness |
+| No agent grades its own work | the checker, a different vendor, on a frozen copy |
+| Every element carries a code-assigned id | coverage is a set difference, not a judgment |
+| Nothing is recorded from a refused answer | re-asked with the exact problems, at most six times |
+| Every loop is bounded and carries its trajectory | convergence computed; the unresolved carried into the report |
+| Tokens are the measure | dollars are a lookup, blank until the price is known |
 
 <details>
 <summary><b>A schema, as the model receives it</b> — the review round's answer</summary>
