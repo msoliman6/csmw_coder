@@ -252,7 +252,6 @@ The example task (`examples/code_builder/task.json`) builds a slug library. Runs
 
 ## Origins
 
-- [freeze-and-swap](https://github.com/msoliman6/freeze-and-swap): the doctrine this workflow runs on, the freeze, the swap, the coded driver and the offline walk.
 - [claudex-loop](https://github.com/chaseai-yt/claudex-loop): Claude Code paired with OpenAI Codex as an adversarial reviewer inside a Claude Code plugin, the pairing this repo is built around.
 
 ## License
