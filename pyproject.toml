@@ -9,8 +9,9 @@ description = "The code-builder workflow: a recipe package for code_steer_model_
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-# the harness; for local work: pip install -e ../code_steer_model_write -e .
-dependencies = ["code_steer_model_write @ git+ssh://git@github.com/msoliman6/code_steer_model_write.git"]
+# the harness, installed first from its checkout: pip install -e ../code_steer_model_write -e .
+# (a private repo, so no URL here; `just install` does both)
+dependencies = ["code_steer_model_write"]
 
 [project.optional-dependencies]
 dev = ["ruff>=0.5", "pyright>=1.1", "pytest>=8", "pytest-json-report>=1.5", "jsonschema>=4"]
