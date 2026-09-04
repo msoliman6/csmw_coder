@@ -110,7 +110,6 @@ The rules below are the ones this workflow leans on, taken from the harness's fo
   refused answer, at most six times, stopping when the problem set repeats.
 - **Every loop is bounded by code and carries its full trajectory.** Convergence is computed; the
   unresolved is carried into the report, never hidden.
-- **Proven offline first.** Fake models walk every branch with zero tokens before a live run.
 - **Tokens are the honest measure.** Dollars are a lookup on read, blank until the price is known.
 
 <details>
