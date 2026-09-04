@@ -14,8 +14,10 @@ LOG="$DATA/bootstrap.log"
     gh repo clone msoliman6/code_steer_model_write "$DATA/harness" -- --quiet
     HARNESS="$DATA/harness"
   fi
-  if [ ! -x "$VENV/bin/python" ] && [ -x "$PLUGIN_ROOT/.venv/bin/csmw" ]; then
-    ln -s "$PLUGIN_ROOT/.venv" "$VENV"   # installed from a checkout that already has its venv
+  if [ ! -x "$VENV/bin/python" ]; then  # a checkout with a venv already? reuse it: the plugin root, or the marketplace's directory
+    for cand in "$PLUGIN_ROOT/.venv" "$(python3 -c "import json,os;m=json.load(open(os.path.expanduser('~/.claude/plugins/known_marketplaces.json')));print((m.get('marketplaces',m).get('csmw') or {}).get('installLocation',''))" 2>/dev/null)/.venv"; do
+      [ -x "$cand/bin/csmw" ] && ln -s "$cand" "$VENV" && break
+    done
   fi
   if [ ! -x "$VENV/bin/python" ]; then
     PY="$(command -v python3.11 || command -v python3)"
