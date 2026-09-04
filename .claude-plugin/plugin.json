@@ -1,12 +1,21 @@
 {
   "name": "csmw-coder",
   "displayName": "csmw coder",
-  "version": "0.1.2",
-  "description": "Build a Python module on the side: two model sides of different vendors, plan, frozen contract, verification design, isolated build, verification run, with code deciding every step. Started from a session, runs detached, never writes back into the session.",
-  "author": { "name": "Moamen Soliman", "url": "https://github.com/msoliman6" },
+  "version": "0.2.0",
+  "description": "Build a Python module on the side: two model sides of different vendors, plan, frozen contract, verification design, isolated build, verification run, with code deciding every step. Started from a session through the workflow's MCP tools, runs detached, never writes back into the session.",
+  "author": {
+    "name": "Moamen Soliman",
+    "url": "https://github.com/msoliman6"
+  },
   "repository": "https://github.com/msoliman6/csmw_coder",
   "license": "MIT",
-  "keywords": ["coding", "claude-code", "codex", "adversarial-review", "constrained-decoding"],
+  "keywords": [
+    "coding",
+    "claude-code",
+    "codex",
+    "adversarial-review",
+    "constrained-decoding"
+  ],
   "userConfig": {
     "harness_path": {
       "type": "string",
@@ -22,6 +31,13 @@
       "type": "string",
       "title": "Dashboard port",
       "description": "The page's port (default: 3007)"
+    }
+  },
+  "mcpServers": {
+    "csmw": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/scripts/mcp.sh",
+      "args": [],
+      "env": {}
     }
   }
 }

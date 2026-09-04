@@ -1,8 +1,8 @@
 ---
 name: build
-description: Build a Python module on the side. Turns this conversation's request into a task and starts a run that continues without you; prints one line and stops.
+description: Build a Python module on the side. Turns this conversation's request into a task and starts a run through the workflow's MCP tool; the run continues without you. Prints one line and stops.
 argument-hint: "[what to build, in one paragraph, if not already said]"
-allowed-tools: Read, Bash
+allowed-tools: Read, mcp__csmw__workflow_run
 ---
 
 Start a code-builder run from what this conversation has established. The run is a separate
@@ -23,12 +23,11 @@ report on it. Your whole answer is one line.
    Fill every field from the conversation and the current project; invent nothing. If the request
    itself is missing, ask for it in one sentence and stop. Do not ask about anything else.
 
-2. Start it, handing the JSON to the script on stdin (write no file yourself):
-   ```bash
-   "${CLAUDE_PLUGIN_ROOT}/scripts/start.sh" - <<'TASK'
-   { ...the JSON object... }
-   TASK
-   ```
+2. Start it: call the `workflow_run` tool of the `csmw` MCP server with `{"task": <the object>}`.
+   The tool validates the task through the recipe, registers the run, launches it detached and
+   returns at once with `run_id`, `run_dir` and `status`. Write no file yourself.
 
-3. Answer with the single line the script printed, verbatim, and nothing more. No summary of the
-   task, no next steps, no offer to check on it. The page in that line is where the run is watched.
+3. Answer with one line: `started <run_id> · runs on its own · http://127.0.0.1:3007/ · <run_dir>`,
+   and nothing more. No summary of the task, no next steps, no offer to check on it. The page in
+   that line is where the run is watched. If the tool refused the task, answer with its reason in
+   one line instead.
