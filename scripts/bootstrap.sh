@@ -27,6 +27,9 @@ LOG="$DATA/bootstrap.log"
   # the runtime first, from its checkout; then the workflow on top of it with no second resolution
   # of the runtime (its name is not on PyPI, so pip would look for it there and refuse)
   "$VENV/bin/pip" install -q -e "$HARNESS" || { echo "pip could not install the runtime from $HARNESS"; exit 1; }
+  # openai on its own, second: Guardrails pins openai<3 for calls the runtime never makes and
+  # PydanticAI's OpenAI path needs >=3.8; pip applies the upgrade with a warning (the runtime's pyproject says why)
+  "$VENV/bin/pip" install -q "openai>=3.8" tiktoken || { echo "pip could not upgrade openai"; exit 1; }
   "$VENV/bin/pip" install -q --no-deps -e "$PLUGIN_ROOT" || { echo "pip could not install the workflow"; exit 1; }
   [ -x "$VENV/bin/csmw" ] || { echo "the install left no csmw in $VENV"; exit 1; }
   echo "$HARNESS" > "$DATA/harness.path"
