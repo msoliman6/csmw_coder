@@ -147,14 +147,19 @@ Industry platforms and guides
 
 ## See it run
 
-One production run, from the start page to the report, on claude-haiku-4-5 and gpt-5.4-mini in auto mode:
-every step under a schema, every check in a container, every event traced.
+One production run on claude-haiku-4-5 and gpt-5.4-mini in auto mode, from the home that lists
+every run, into the finished run, down to where the time went: every step under a schema, every
+check in a container, every event traced.
 
-<p align="center"><img src="docs/media/run.gif" alt="A run from the start page to the report" width="900"></p>
+<p align="center"><img src="docs/media/run.gif" alt="From the home to a finished run and its timeline" width="900"></p>
 
 <p align="center">
 <img src="docs/media/start-page.png" alt="The start page" width="440">
-<img src="docs/media/run-page.png" alt="The run page, mid-run" width="440">
+<img src="docs/media/home.png" alt="The home: every run, the counters, the trends" width="440">
+</p>
+<p align="center">
+<img src="docs/media/run-page.png" alt="A finished run: the rail, the verdict, the results" width="440">
+<img src="docs/media/timeline.png" alt="Where the time went: one row per step, the stages as bands" width="440">
 </p>
 
 ## Quick start
