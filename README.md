@@ -34,11 +34,14 @@
 <a href="https://openai.com/codex/"><img alt="OpenAI Codex: adversarial checker" src="https://img.shields.io/badge/OpenAI_Codex-adversarial%20checker-10a37f?style=flat-square"></a>
 </p>
 
-<p align="center"><a href="#a-production-grade-agentic-workflow">The layers</a> · <a href="#see-it-run">See it run</a> · <a href="#quick-start">Quick start</a> · <a href="#workflow">Workflow</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#license">License</a></p>
+<p align="center"><a href="#a-production-grade-agentic-workflow">The layers</a> · <a href="#see-it-run">See it run</a> · <a href="#quick-start">Quick start</a> · <a href="#workflow">Workflow</a> · <a href="#origins">Origins</a> · <a href="#license">License</a></p>
 
 <p align="center">
-<a href="examples/code_builder/task.json"><img alt="example: task.json" src="https://img.shields.io/badge/example-task.json-30363d?style=flat-square"></a>
+<a href=".claude-plugin/plugin.json"><img alt="plugin: plugin.json" src="https://img.shields.io/badge/plugin-plugin.json-30363d?style=flat-square"></a>
+<a href="scripts/mcp.sh"><img alt="MCP server: mcp.sh" src="https://img.shields.io/badge/MCP%20server-mcp.sh-30363d?style=flat-square"></a>
 <a href="csmw_coder/workflow.py"><img alt="workflow: workflow.py" src="https://img.shields.io/badge/workflow-workflow.py-30363d?style=flat-square"></a>
+<a href="examples/code_builder/task.json"><img alt="example: task.json" src="https://img.shields.io/badge/example-task.json-30363d?style=flat-square"></a>
+<a href="plugin/defaults.json"><img alt="defaults: defaults.json" src="https://img.shields.io/badge/defaults-defaults.json-30363d?style=flat-square"></a>
 </p>
 
 <p align="center"><i>Independent open-source project. Not affiliated with or endorsed by Anthropic or OpenAI.<br>Claude and Claude Code are trademarks of Anthropic; Codex and GPT are trademarks of OpenAI. Prefect, MLflow, Reflex, PydanticAI, pydantic, Guardrails AI, Cedar, Docker, Colima, obstore, Typer, Jinja2, SQLite, OpenTelemetry, the Model Context Protocol, ruff, pyright and pytest belong to their owners.</i></p>
