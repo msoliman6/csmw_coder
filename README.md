@@ -167,7 +167,8 @@ check in a container, every event traced.
 Install the plugin once, then start a production-grade build from any Claude Code session:
 
 ```bash
-claude plugin install github:msoliman6/csmw_coder
+claude plugin marketplace add msoliman6/csmw_coder
+claude plugin install csmw-coder@csmw
 ```
 
 ```text
@@ -184,7 +185,13 @@ Codex checks, both on your own logins, low effort, auto mode, one round; change 
 `plugin/defaults.json` or say what you want before `/csmw-coder:build`. The plugin's MCP server
 answers every verb (`workflow_run`, `workflow_status`, `workflow_cancel`, `workflow_pause`,
 `workflow_resume`, `workflow_run_again`, `run_list`, `run_get`, `run_logs`, `run_artifacts`,
-`run_forget`) to any MCP host. Runs live under `~/.csmw/runs`.
+`run_forget`, `run_delete`) to any MCP host, and the plugin's skill tells Claude Code when the
+coder fits a request and what a task looks like, so a session can compose one without being
+asked. Runs live under `~/.csmw/runs`.
+
+**On a remote machine.** The page binds to the machine it runs on. From your own browser,
+open a tunnel and use the same address: `ssh -L 3007:127.0.0.1:3007 user@host`. To put the
+page on another port once and for all: `/csmw-coder:dashboard 4010`.
 
 **Cost.** The page prices a run's tokens on read from a vendored copy of LiteLLM's model price map
 (420 models, the file and not the package). A model the map does not know shows `$?`. To override
