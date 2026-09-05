@@ -3,7 +3,7 @@
 <img src="docs/media/banner.svg" alt="csmw coder" width="720">
 </picture></p>
 
-<p align="center"><b>The code-builder workflow: two model sides of different vendors build a Python module, with code deciding every step.</b><br>A production-grade agentic workflow: ten layers, each behind a seam with one production tool, proven live end to end.<br>A Claude Code plugin with its own MCP server: one command starts a build that runs on the side, sends nothing back into your session, and is watched on its page.</p>
+<p align="center"><b>csmw coder — <i>code steers, models write</i>. The code-builder workflow: two model sides of different vendors build a Python module, with code deciding every step.</b><br>A production-grade agentic workflow: ten layers, each behind a seam with one production tool, proven live end to end.<br>A Claude Code plugin with its own MCP server: one command starts a build that runs on the side, sends nothing back into your session, and is watched on its page.</p>
 
 
 <p align="center">
@@ -215,6 +215,11 @@ What each stage does, who writes and who attacks, where code freezes, merges and
 </picture></p>
 
 ## Origins
+
+**The name.** csmw is *code steers, models write*: code decides every step, renders every input,
+checks every answer and writes every file; a model only ever answers. The page says the same
+thing in its top-left corner.
+
 
 - [claudex-loop](https://github.com/chaseai-yt/claudex-loop): Claude Code paired with OpenAI Codex as an adversarial reviewer inside a Claude Code plugin, the pairing this repo is built around.
 
