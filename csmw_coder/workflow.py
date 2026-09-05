@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import json
 import re
-import tempfile
 from pathlib import Path
 from typing import Any, Callable
 
@@ -1199,7 +1198,7 @@ class CodeBuilder(Recipe):
     def _k_compile(self, ctx: ProgramContext) -> list[str]:
         a = ctx.answer
         assert isinstance(a, FilesAuthor)
-        with tempfile.TemporaryDirectory() as d:
+        with ctx.paths.staging() as d:  # inside the run: the one place every sandbox tier reaches
             f = Path(d) / Path(a.files[0].path).name
             f.write_text(a.files[0].content)
             r = check_python([f], types=False)
@@ -1208,7 +1207,7 @@ class CodeBuilder(Recipe):
     def _k_lint(self, ctx: ProgramContext) -> list[str]:
         a = ctx.answer
         assert isinstance(a, FilesAuthor)
-        with tempfile.TemporaryDirectory() as d:
+        with ctx.paths.staging() as d:  # inside the run: the one place every sandbox tier reaches
             f = Path(d) / Path(a.files[0].path).name
             f.write_text(a.files[0].content)
             r = check_python([f], types=(ctx.step.check_extra.get("kind") == "src"))
@@ -1228,7 +1227,7 @@ class CodeBuilder(Recipe):
         manifest = self._manifest(a.files[0].content, rel)
         if not manifest:
             return ["no_tests: no `def test_P_NNNN_...` function found; name each test after its property id"]
-        with tempfile.TemporaryDirectory() as d:
+        with ctx.paths.staging() as d:  # inside the run: the one place every sandbox tier reaches
             root = Path(d)
             (root / "null").mkdir()
             (root / "null" / f"{module}.py").write_text(null_module(c))
