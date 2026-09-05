@@ -8,32 +8,13 @@
 <p align="center">
 <a href="LICENSE"><img alt="license: MIT" src="https://img.shields.io/badge/license-MIT-bb8009?style=flat-square"></a>
 <a href="https://www.python.org/"><img alt="python: 3.11+" src="https://img.shields.io/badge/python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white"></a>
-<a href="https://docs.pydantic.dev/"><img alt="schemas: pydantic v2" src="https://img.shields.io/badge/schemas-pydantic%20v2-E92063?style=flat-square&logo=pydantic&logoColor=white"></a>
-<a href="https://www.prefect.io/"><img alt="orchestration: prefect" src="https://img.shields.io/badge/orchestration-prefect-d04a45?style=flat-square&logo=prefect&logoColor=white"></a>
-<a href="https://mlflow.org/"><img alt="traces and evals: mlflow" src="https://img.shields.io/badge/traces%20and%20evals-mlflow-2fa39a?style=flat-square&logo=mlflow&logoColor=white"></a>
-<a href="https://reflex.dev/"><img alt="dashboard: reflex" src="https://img.shields.io/badge/dashboard-reflex-5646ED?style=flat-square&logo=reflex&logoColor=white"></a>
-</p>
-<p align="center">
-<a href="https://docs.astral.sh/ruff/"><img alt="code check: ruff" src="https://img.shields.io/badge/code%20check-ruff-D7FF64?style=flat-square&logo=ruff&logoColor=black"></a>
-<a href="https://github.com/microsoft/pyright"><img alt="code check: pyright" src="https://img.shields.io/badge/code%20check-pyright-9a6ee0?style=flat-square&logoSize=auto&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEZUlEQVR42q2XS2hdVRSGv3XOyW2vTWpbbWOTRokPqC1ixIkPKDhRcVwHgg6dOXCgA0eOFHGiE4VOFEEF8UHxBYoDwYkdWRVDhQ7EmrSxJjfXJjfNfZzloP%2BWlePNzU1ww%2BHec%2FZj%2Fetf%2F1p7b9hGc%2FdMv%2BPu%2FpW7v%2BjuE6E%2Fd3fbzpq2HeNmVrr7IeBl4A5gP3AZ%2BBJ438wuJiBAaWb%2BvwAIxseAN4ASGAGmgavADUAT%2BAx4z8zmhwViQxg3M3N33w28CtwILAAHgKPAlQBon96HBmJbGdeYEeAVYBK4COzS97vEQGpdoFBo%2FgY%2BrwCxKgjbyriofwm4E7gg4wA94LjW6FbW6gZGmsCnwNtm1qiCyAbpQ8ZfAI4BvwE54AHAmjyuUpu%2BXdbvk8BH7j4Ts2lTAEF0zwP3AedF66EKe62wRj82E5BLwEHgpLy3TQG4ewGYuz8BnADmxcBhYByoBY9bComLdt8EyG6gAdzr7nuumblWL7LotTzvmlkPeFQTpyWoc8AiUAc6AnJcnk2JoSIAia1UuA4DM2ZWJqBFUGep%2F9PAyZBuDQ2O8c%2BBBxSSrsRWB67TewNoa14RsqYAnnL3eWAOaFvI82PA48DdWmQhTErK3q8wTKoOLAHLEtufMvSQAF5RXxtY0f9VMXcbcMrM3ilk%2FBngYU2aF2W1FJ2glxZwvUT1g8avB8Gtab7LgWS0G1hsAPendE7ejStfF9WR94ljyvczSsFcoGqhvycAKwJQ6Ht61rWHTAr8vwC%2BV1VrDLE1FGGeB6AuUEvAPcAton9dv2sac1TvGwD8LPTZMHvTgL5MlDfFZKlMSozulVjbAkqmfJwD%2FtJgZ2ct0ewq2VnwfFWp3AlOlAlxprw%2FD4yKiZ0Y7oruutJzNK2vJ9eTxq7EEAD8BDwYqpkPcY4o5VWmFJ0CJoA98n5E%2FRbqRyZWlhOAUp0%2FalI%2BwLiFjainOE8AN6twpUp4VcbHFNpMc7MAvARIdcCUNgtCv1YRZGIkxXAMOKJnb9gL2sFQqb7lSi0xrd%2BKIcjMrOfus6pkq2IielsAN8nbcXmfjEYtJJFl4VsZ3lOV3KCBhPAs8EjwqBQjk4rvPi3SkeCsz%2B6X6kEH%2BEPgLTCzQWNVAL%2BKGlNMp7SD1bVQp4%2B3%2FYy3ZbwbwpGM7gJ%2BEeN5oaOPaytecvcm8JgWqoX02uoMmYyvB8%2BzSvwLOfhampP1OQeeUkHKtJgP8Di2XOL6PaSeV84EB3R%2FmHX33MzKLBwAS4nxLPBsUPewxagl47l0k9K5p5AU2uxel6P%2BnyOZ4lKY2YfAm9JBZ4DhUiFC3s0obBfERl2XloPA7cBbZjYnR8u%2BMRW6lDKfqDouVwSbRFXX09SO%2BjHwjZktuvtoMD4B3Aq8KxZIR3Pb4lR8BPhaZXZN42uiuAfMAl8Ap83s3E53sM0uJrlCcgL4IBSRS8C3wGngOzNrV5grQ3W1Str2hrmwVo%2FouPtz7n7G3Z%2BO1%2FE0Jl40ttv%2BAbe8BGG9m5lPAAAAAElFTkSuQmCC"></a>
-<a href="https://docs.pytest.org/"><img alt="verification: pytest" src="https://img.shields.io/badge/verification-pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white"></a>
-<a href="https://www.sqlite.org/"><img alt="run registry: sqlite" src="https://img.shields.io/badge/run%20registry-sqlite-003B57?style=flat-square&logo=sqlite&logoColor=white"></a>
-<a href="https://ai.pydantic.dev/"><img alt="any provider: pydanticai" src="https://img.shields.io/badge/any%20provider-pydanticai-E92063?style=flat-square&logo=pydantic&logoColor=white"></a>
-<a href="https://www.cedarpolicy.com/"><img alt="authorization: cedar" src="https://img.shields.io/badge/authorization-cedar-5a4fcf?style=flat-square"></a>
-<a href="https://www.guardrailsai.com/"><img alt="guardrails: guardrails ai" src="https://img.shields.io/badge/guardrails-guardrails%20ai-1f6feb?style=flat-square"></a>
-<a href="https://docs.docker.com/engine/api/sdk/"><img alt="sandbox: docker" src="https://img.shields.io/badge/sandbox-docker-2496ED?style=flat-square&logo=docker&logoColor=white"></a>
-<a href="https://modelcontextprotocol.io/"><img alt="gateway: mcp" src="https://img.shields.io/badge/gateway-mcp-30363d?style=flat-square"></a>
 </p>
 <p align="center">
 <a href="https://docs.anthropic.com/en/docs/claude-code"><img alt="Claude Code: author" src="https://img.shields.io/badge/Claude_Code-author-d97757?style=flat-square"></a>
 <a href="https://openai.com/codex/"><img alt="OpenAI Codex: adversarial checker" src="https://img.shields.io/badge/OpenAI_Codex-adversarial%20checker-10a37f?style=flat-square"></a>
-<a href="https://github.com/anthropics/anthropic-sdk-python"><img alt="Anthropic SDK" src="https://img.shields.io/badge/Anthropic_SDK-backend-d97757?style=flat-square"></a>
-<a href="https://github.com/anthropics/claude-agent-sdk-python"><img alt="Claude Agent SDK" src="https://img.shields.io/badge/Claude_Agent_SDK-backend-d97757?style=flat-square"></a>
-<a href="https://docs.anthropic.com/en/docs/claude-code"><img alt="Claude Code CLI" src="https://img.shields.io/badge/Claude_Code_CLI-backend-d97757?style=flat-square"></a>
-<a href="https://github.com/openai/codex"><img alt="OpenAI Codex CLI" src="https://img.shields.io/badge/OpenAI_Codex_CLI-backend-10a37f?style=flat-square"></a>
 </p>
 
-<p align="center"><a href="#see-it-run">See it run</a> · <a href="#quick-start">Quick start</a> · <a href="#workflow">Workflow</a> · <a href="#the-ten-layers">The ten layers</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#license">License</a></p>
+<p align="center"><a href="#see-it-run">See it run</a> · <a href="#quick-start">Quick start</a> · <a href="#workflow">Workflow</a> · <a href="#execution-layers-and-governance-planes">The layers</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#license">License</a></p>
 
 <p align="center">
 <a href="examples/code_builder/task.json"><img alt="example: task.json" src="https://img.shields.io/badge/example-task.json-30363d?style=flat-square"></a>
@@ -53,81 +34,26 @@ One run, from the start page to the report, on claude-haiku-4-5 and gpt-5.4-mini
 <img src="docs/media/run-page.png" alt="The run page, mid-run" width="440">
 </p>
 
-## Quick start
+## Execution layers and governance planes
 
-The coder is a Claude Code plugin. Install it once, then start a build from any session:
+The workflow above runs on a runtime of seven execution layers and three cross-cutting planes,
+each behind a seam with one production tool chosen for it. Every choice is free, self-hosted and
+a Python SDK; the offline walk proves every layer with fake models before any live run.
 
-```bash
-claude plugin install github:msoliman6/csmw_coder      # or: claude plugin install /path/to/csmw_coder
-```
+<img alt="interface & control" src="https://img.shields.io/badge/-interface%20%26%20control-5646ED?style=flat-square"> <img alt="orchestration & runtime" src="https://img.shields.io/badge/-orchestration%20%26%20runtime-d04a45?style=flat-square"> <img alt="execution & tools" src="https://img.shields.io/badge/-execution%20%26%20tools-2496ED?style=flat-square"> <img alt="state" src="https://img.shields.io/badge/-state-1f6feb?style=flat-square"> <img alt="cross-cutting planes" src="https://img.shields.io/badge/-cross-cutting%20planes-bb8009?style=flat-square">
 
-```text
-/csmw-coder:build      turns what the conversation established into a task and starts the run
-/csmw-coder:status     one line per run, newest first
-/csmw-coder:dashboard  the page's address, starting it if needed
-```
-
-`/csmw-coder:build` writes the task from the conversation and hands it to the plugin's MCP
-server (`workflow_run`), which validates it, registers the run and starts it detached; the
-answer is one line: the run's name, the page's address, the run's folder. Nothing else comes
-back into the session; the page is where the run is watched, and the report lands in the run's
-folder. The same server answers `workflow_status`, `workflow_cancel`, `workflow_pause`,
-`workflow_resume`, `workflow_run_again`, `run_list`, `run_get`, `run_logs`, `run_artifacts`
-and `run_forget` to any MCP host. Runs live under `~/.csmw/runs`, outside any project. The
-first build sets up the plugin's environment, which takes a few minutes once.
-
-The models: Claude Code as the author and OpenAI Codex as the adversarial checker, both through
-their CLIs on your logins, low effort, auto mode, one round. Change the defaults in
-`plugin/defaults.json`, or say what you want in the conversation before `/csmw-coder:build`.
-
-<details>
-<summary><b>Without the plugin</b> — the same run from a shell</summary>
-
-```bash
-just install          # a venv with the runtime and this package
-just doctor           # the backends, the CLIs, the keys
-just run              # the example task live
-just dash             # the page at http://127.0.0.1:3007
-```
-
-The example task (`examples/code_builder/task.json`) builds a slug library.
-
-</details>
-
-**Cost.** The page prices a run's tokens on read from a vendored copy of LiteLLM's model price map
-(420 models, the file and not the package). A model the map does not know shows `$?`. To override
-a rate, put it in `prices.json` as US dollars per million tokens, input first, output second:
-`{"my-negotiated-model": [0.25, 2.0]}`. Cached input is billed at the map's cached rate.
-The figure is the API price of the tokens; a side run on `claude -p` or `codex exec` under a
-subscription login is not billed per token, and the page marks such an estimate "at API rates".
-
-## Workflow
-
-What each stage does, who writes and who attacks, where code freezes, merges and runs.
-
-<p align="center"><picture>
-<source media="(prefers-color-scheme: dark)" srcset="docs/media/workflow-dark.svg">
-<img src="docs/media/workflow.svg" alt="How the code-builder workflow operates" width="820">
-</picture></p>
-
-## The ten layers
-
-The workflow above runs on a runtime of ten layers, seven of execution and three cross-cutting
-planes, each behind a seam with one tool chosen for it. Every choice is free, self-hosted and a
-Python SDK; the offline walk proves every layer with fake models before any live run.
-
-| layer | what it owns | behind the seam |
-|---|---|---|
-| L1 UI | a home of every run, the run page, the start page | Reflex, Jinja2 |
-| L2 control plane | the task, the budgets, the run registry, the MCP server this plugin declares | pydantic, the MCP SDK, Typer, SQLite |
-| L3 orchestration | the sequence: the driver derives the next step from disk; the runner detaches, cancels, pauses, resumes, runs the tests and the source side by side | the driver, Prefect 3 as the runner |
-| L4 agent runtime | one model call under a schema | Claude Code and Codex on their logins; PydanticAI where keys exist |
-| L5 sandbox | where every check runs, bounded: network off, the run folder the only mount | a container per check on the Docker SDK over Colima; a subprocess tier for the walk |
-| L6 tools | the typed registry of git, pytest, ruff and pyright, every call an event | the runtime's `ToolSpec` registry |
-| L7 state | the record: files per run, versioned artifacts, the index across runs | files, SQLite, obstore |
-| L8 observability | traces, tokens, the five evaluations, trends across runs | MLflow 3 on SQLite, OpenTelemetry names |
-| L9 authorization | may this side author, judge, write or call this | Cedar, one policy file |
-| L10 guardrails | before the prompt, after the answer, before a tool call | the schema and the checks, Guardrails AI validators |
+| group | layer | what it owns | behind the seam |
+|---|---|---|---|
+| <img alt="interface & control" src="https://img.shields.io/badge/-interface%20%26%20control-5646ED?style=flat-square"> | **L1 UI** | a home of every run, the run page, the start page | <a href="https://reflex.dev/"><img alt="UI: Reflex" src="https://img.shields.io/badge/UI-Reflex-5646ED?style=flat-square&logo=reflex&logoColor=white"></a> <a href="https://jinja.palletsprojects.com/"><img alt="pages: Jinja2" src="https://img.shields.io/badge/pages-Jinja2-B41717?style=flat-square&logo=jinja&logoColor=white"></a> |
+| <img alt="interface & control" src="https://img.shields.io/badge/-interface%20%26%20control-5646ED?style=flat-square"> | **L2 control plane** | the task, the budgets, the run registry, the MCP server this plugin declares | <a href="https://docs.pydantic.dev/"><img alt="schemas: pydantic v2" src="https://img.shields.io/badge/schemas-pydantic%20v2-E92063?style=flat-square&logo=pydantic&logoColor=white"></a> <a href="https://modelcontextprotocol.io/"><img alt="gateway: MCP SDK" src="https://img.shields.io/badge/gateway-MCP%20SDK-30363d?style=flat-square"></a> <a href="https://typer.tiangolo.com/"><img alt="CLI: Typer" src="https://img.shields.io/badge/CLI-Typer-1f6feb?style=flat-square"></a> <a href="https://www.sqlite.org/"><img alt="run registry: SQLite" src="https://img.shields.io/badge/run%20registry-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white"></a> |
+| <img alt="orchestration & runtime" src="https://img.shields.io/badge/-orchestration%20%26%20runtime-d04a45?style=flat-square"> | **L3 orchestration** | the sequence: the driver derives the next step from disk; the runner detaches, cancels, pauses, resumes, runs the tests and the source side by side | <a href="https://www.prefect.io/"><img alt="runner: Prefect 3" src="https://img.shields.io/badge/runner-Prefect%203-d04a45?style=flat-square&logo=prefect&logoColor=white"></a> |
+| <img alt="orchestration & runtime" src="https://img.shields.io/badge/-orchestration%20%26%20runtime-d04a45?style=flat-square"> | **L4 agent runtime** | one model call under a schema | <a href="https://docs.anthropic.com/en/docs/claude-code"><img alt="author: Claude Code" src="https://img.shields.io/badge/author-Claude%20Code-d97757?style=flat-square"></a> <a href="https://github.com/openai/codex"><img alt="checker: OpenAI Codex" src="https://img.shields.io/badge/checker-OpenAI%20Codex-10a37f?style=flat-square"></a> <a href="https://ai.pydantic.dev/"><img alt="API path: PydanticAI" src="https://img.shields.io/badge/API%20path-PydanticAI-E92063?style=flat-square&logo=pydantic&logoColor=white"></a> |
+| <img alt="execution & tools" src="https://img.shields.io/badge/-execution%20%26%20tools-2496ED?style=flat-square"> | **L5 sandbox** | where every check runs, bounded: network off, the run folder the only mount | <a href="https://docs.docker.com/engine/api/sdk/"><img alt="sandbox: Docker SDK" src="https://img.shields.io/badge/sandbox-Docker%20SDK-2496ED?style=flat-square&logo=docker&logoColor=white"></a> <a href="https://github.com/abiosoft/colima"><img alt="engine: Colima" src="https://img.shields.io/badge/engine-Colima-2496ED?style=flat-square"></a> |
+| <img alt="execution & tools" src="https://img.shields.io/badge/-execution%20%26%20tools-2496ED?style=flat-square"> | **L6 tools** | the typed registry of git, pytest, ruff and pyright, every call an event | <a href="https://git-scm.com/"><img alt="tool: git" src="https://img.shields.io/badge/tool-git-F05032?style=flat-square&logo=git&logoColor=white"></a> <a href="https://docs.pytest.org/"><img alt="verification: pytest" src="https://img.shields.io/badge/verification-pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white"></a> <a href="https://docs.astral.sh/ruff/"><img alt="check: ruff" src="https://img.shields.io/badge/check-ruff-D7FF64?style=flat-square&logo=ruff&logoColor=black"></a> <a href="https://github.com/microsoft/pyright"><img alt="check: pyright" src="https://img.shields.io/badge/check-pyright-9a6ee0?style=flat-square"></a> |
+| <img alt="state" src="https://img.shields.io/badge/-state-1f6feb?style=flat-square"> | **L7 state** | the record: files per run, versioned artifacts, the index across runs | <a href="https://www.sqlite.org/"><img alt="run registry: SQLite" src="https://img.shields.io/badge/run%20registry-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white"></a> <a href="https://developmentseed.org/obstore/"><img alt="artifacts: obstore" src="https://img.shields.io/badge/artifacts-obstore-003B57?style=flat-square"></a> |
+| <img alt="cross-cutting planes" src="https://img.shields.io/badge/-cross-cutting%20planes-bb8009?style=flat-square"> | **L8 observability** | traces, tokens, the five evaluations, trends across runs | <a href="https://mlflow.org/"><img alt="traces & evals: MLflow 3" src="https://img.shields.io/badge/traces%20%26%20evals-MLflow%203-2fa39a?style=flat-square&logo=mlflow&logoColor=white"></a> <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/"><img alt="names: OpenTelemetry" src="https://img.shields.io/badge/names-OpenTelemetry-425CC7?style=flat-square&logo=opentelemetry&logoColor=white"></a> |
+| <img alt="cross-cutting planes" src="https://img.shields.io/badge/-cross-cutting%20planes-bb8009?style=flat-square"> | **L9 authorization** | may this side author, judge, write or call this | <a href="https://www.cedarpolicy.com/"><img alt="authorization: Cedar" src="https://img.shields.io/badge/authorization-Cedar-5a4fcf?style=flat-square"></a> |
+| <img alt="cross-cutting planes" src="https://img.shields.io/badge/-cross-cutting%20planes-bb8009?style=flat-square"> | **L10 guardrails** | before the prompt, after the answer, before a tool call | <a href="https://www.guardrailsai.com/"><img alt="guardrails: Guardrails AI" src="https://img.shields.io/badge/guardrails-Guardrails%20AI-1f6feb?style=flat-square"></a> <a href="https://docs.pydantic.dev/"><img alt="schemas: pydantic v2" src="https://img.shields.io/badge/schemas-pydantic%20v2-E92063?style=flat-square&logo=pydantic&logoColor=white"></a> |
 
 The layering is the shape the production platforms have converged on. AWS Bedrock AgentCore
 names thirteen services [1], Google Vertex Agent Engine eleven [2], Palantir AIP twelve [3],
@@ -208,6 +134,37 @@ run id
    +-- the run folder -> the record: state, events, artifacts, evals
 ```
 
+## Quick start
+
+Install the plugin once, then start a build from any Claude Code session:
+
+```bash
+claude plugin install github:msoliman6/csmw_coder
+```
+
+```text
+/csmw-coder:build      turns what the conversation established into a task and starts the run
+/csmw-coder:status     one line per run, newest first
+/csmw-coder:dashboard  the page's address, starting it if needed
+```
+
+The run starts detached and answers with one line: its name, the page's address, its folder.
+The page is where it is watched; the report lands in the folder. Claude Code writes, OpenAI
+Codex checks, both on your own logins, low effort, auto mode, one round; change the defaults in
+`plugin/defaults.json` or say what you want before `/csmw-coder:build`. The plugin's MCP server
+answers every verb (`workflow_run`, `workflow_status`, `workflow_cancel`, `workflow_pause`,
+`workflow_resume`, `workflow_run_again`, `run_list`, `run_get`, `run_logs`, `run_artifacts`,
+`run_forget`) to any MCP host. Runs live under `~/.csmw/runs`.
+
+## Workflow
+
+What each stage does, who writes and who attacks, where code freezes, merges and runs.
+
+<p align="center"><picture>
+<source media="(prefers-color-scheme: dark)" srcset="docs/media/workflow-dark.svg">
+<img src="docs/media/workflow.svg" alt="How the code-builder workflow operates" width="820">
+</picture></p>
+
 ## How the models are held
 
 | What holds | How |
@@ -220,6 +177,13 @@ run id
 | Nothing is recorded from a refused answer | re-asked with the exact problems, at most six times |
 | Every loop is bounded and carries its trajectory | convergence computed; the unresolved carried into the report |
 | Tokens are the measure | dollars are a lookup, blank until the price is known |
+
+**Cost.** The page prices a run's tokens on read from a vendored copy of LiteLLM's model price map
+(420 models, the file and not the package). A model the map does not know shows `$?`. To override
+a rate, put it in `prices.json` as US dollars per million tokens, input first, output second:
+`{"my-negotiated-model": [0.25, 2.0]}`. Cached input is billed at the map's cached rate.
+The figure is the API price of the tokens; a side run on `claude -p` or `codex exec` under a
+subscription login is not billed per token, and the page marks such an estimate "at API rates".
 
 <details>
 <summary><b>A schema, as the model receives it</b> — the review round's answer</summary>
