@@ -3,7 +3,7 @@
 <img src="docs/media/banner.svg" alt="csmw coder" width="720">
 </picture></p>
 
-<p align="center"><b>Code steers, models write, coder: two model sides of different vendors build a Python module, with code deciding every step.</b><br>A production-grade agentic workflow: ten layers, each behind a seam with one production tool, proven live end to end.<br>A Claude Code plugin with its own MCP server: one command starts a build that runs on the side, sends nothing back into your session, and is watched on its page.</p>
+<p align="center"><b>Code steers, models write, coder: two model sides of different vendors build a Python module, with code deciding every step.</b><br>A production-grade agentic workflow: ten layers, each behind a seam with one production tool, proven live end to end.<br>A Claude Code plugin with its own MCP server: one command starts a build that runs on the side, sends nothing back into your session, and is watched on its page.<br>The engine is <a href="https://github.com/msoliman6/code_steer_model_write">Code steers, models write</a>, the runtime that holds the ten layers; the plugin installs it on first use.</p>
 
 
 <p align="center">
@@ -50,9 +50,11 @@
 
 <p><i>Execution layers and governance planes</i></p>
 
-The workflow runs on a runtime of seven execution layers and three cross-cutting planes, each
-behind a seam with one production-grade package chosen for it: free, self-hosted, a Python SDK,
-the same tool the platforms ship. The ten came out of reading what Anthropic, OpenAI, Google,
+The workflow runs on [Code steers, models write](https://github.com/msoliman6/code_steer_model_write),
+a runtime of seven execution layers and three cross-cutting planes, each behind a seam with one
+production-grade package chosen for it: free, self-hosted, a Python SDK, the same tool the
+platforms ship. This repository holds the workflow; the runtime is the engine, and every layer
+below is its. The ten came out of reading what Anthropic, OpenAI, Google,
 Microsoft, AWS, Palantir and IBM publish about their agent platforms, and the papers and
 standards behind them; the second table says what each layer rests on, with the sources.
 
@@ -185,6 +187,12 @@ answers every verb (`workflow_run`, `workflow_status`, `workflow_cancel`, `workf
 `run_forget`, `run_delete`) to any MCP host, and the plugin's skill tells Claude Code when the
 coder fits a request and what a task looks like, so a session can compose one without being
 asked. Runs live under `~/.csmw/runs`.
+
+**The first build sets up the engine.** The plugin clones
+[Code steers, models write](https://github.com/msoliman6/code_steer_model_write) into its own
+data folder with `gh`, makes a virtual environment there and installs the runtime and this
+workflow into it. A few minutes, once; nothing touches your projects. A checkout of your own can
+be pointed at instead through the plugin's `harness_path` setting.
 
 **On a remote machine.** The page binds to the machine it runs on. From your own browser,
 open a tunnel and use the same address: `ssh -L 3007:127.0.0.1:3007 user@host`. To put the
