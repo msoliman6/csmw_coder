@@ -14,7 +14,7 @@
 <a href="https://openai.com/codex/"><img alt="OpenAI Codex: adversarial checker" src="https://img.shields.io/badge/OpenAI_Codex-adversarial%20checker-10a37f?style=flat-square"></a>
 </p>
 
-<p align="center"><a href="#see-it-run">See it run</a> · <a href="#quick-start">Quick start</a> · <a href="#workflow">Workflow</a> · <a href="#execution-layers-and-governance-planes">The layers</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#license">License</a></p>
+<p align="center"><a href="#see-it-run">See it run</a> · <a href="#quick-start">Quick start</a> · <a href="#workflow">Workflow</a> · <a href="#a-production-grade-agentic-workflow">The layers</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#license">License</a></p>
 
 <p align="center">
 <a href="examples/code_builder/task.json"><img alt="example: task.json" src="https://img.shields.io/badge/example-task.json-30363d?style=flat-square"></a>
@@ -23,14 +23,15 @@
 
 <p align="center"><i>Independent open-source project. Not affiliated with or endorsed by Anthropic or OpenAI.<br>Claude and Claude Code are trademarks of Anthropic; Codex and GPT are trademarks of OpenAI. Prefect, MLflow, Reflex, ruff, pyright and pytest belong to their owners.</i></p>
 
-## Execution layers and governance planes
+## A production-grade agentic workflow
+
+<p><i>Execution layers and governance planes</i></p>
 
 The workflow runs on a runtime of seven execution layers and three cross-cutting planes, each
-behind a seam with one production tool chosen for it. Every choice is free, self-hosted and a
-Python SDK; the offline walk proves every layer with fake models before any live run. The ten
-came out of reading what Anthropic, OpenAI, Google, Microsoft, AWS, Palantir and IBM publish
-about their agent platforms, and the papers and standards behind them; the second table below
-says what each layer rests on, with the sources.
+behind a seam with one production-grade package chosen for it: free, self-hosted, a Python SDK,
+the same tool the platforms ship. The ten came out of reading what Anthropic, OpenAI, Google,
+Microsoft, AWS, Palantir and IBM publish about their agent platforms, and the papers and
+standards behind them; the second table says what each layer rests on, with the sources.
 
 <img alt="interface & control" src="https://img.shields.io/badge/-interface%20%26%20control-5646ED?style=flat-square"> <img alt="orchestration & runtime" src="https://img.shields.io/badge/-orchestration%20%26%20runtime-d04a45?style=flat-square"> <img alt="execution & tools" src="https://img.shields.io/badge/-execution%20%26%20tools-2496ED?style=flat-square"> <img alt="state" src="https://img.shields.io/badge/-state-1f6feb?style=flat-square"> <img alt="cross-cutting planes" src="https://img.shields.io/badge/-cross--cutting%20planes-bb8009?style=flat-square">
 
@@ -115,20 +116,10 @@ Industry platforms and guides
 
 </details>
 
-Every subsystem receives the same run id, and the page joins on it:
-
-```text
-run id
-   |
-   +-- Prefect ------> what is executing?
-   +-- MLflow -------> what did the models do, at what cost, how well?
-   +-- the registry -> which runs exist, where, in what state?
-   +-- the run folder -> the record: state, events, artifacts, evals
-```
-
 ## See it run
 
-One run, from the start page to the report, on claude-haiku-4-5 and gpt-5.4-mini in auto mode.
+One production run, from the start page to the report, on claude-haiku-4-5 and gpt-5.4-mini in auto mode:
+every step under a schema, every check in a container, every event traced.
 
 <p align="center"><img src="docs/media/run.gif" alt="A run from the start page to the report" width="900"></p>
 
@@ -139,7 +130,7 @@ One run, from the start page to the report, on claude-haiku-4-5 and gpt-5.4-mini
 
 ## Quick start
 
-Install the plugin once, then start a build from any Claude Code session:
+Install the plugin once, then start a production-grade build from any Claude Code session:
 
 ```bash
 claude plugin install github:msoliman6/csmw_coder
@@ -151,35 +142,13 @@ claude plugin install github:msoliman6/csmw_coder
 /csmw-coder:dashboard  the page's address, starting it if needed
 ```
 
-The run starts detached and answers with one line: its name, the page's address, its folder.
+The run starts detached under the production runner and answers with one line: its name, the page's address, its folder.
 The page is where it is watched; the report lands in the folder. Claude Code writes, OpenAI
 Codex checks, both on your own logins, low effort, auto mode, one round; change the defaults in
 `plugin/defaults.json` or say what you want before `/csmw-coder:build`. The plugin's MCP server
 answers every verb (`workflow_run`, `workflow_status`, `workflow_cancel`, `workflow_pause`,
 `workflow_resume`, `workflow_run_again`, `run_list`, `run_get`, `run_logs`, `run_artifacts`,
 `run_forget`) to any MCP host. Runs live under `~/.csmw/runs`.
-
-## Workflow
-
-What each stage does, who writes and who attacks, where code freezes, merges and runs.
-
-<p align="center"><picture>
-<source media="(prefers-color-scheme: dark)" srcset="docs/media/workflow-dark.svg">
-<img src="docs/media/workflow.svg" alt="How the code-builder workflow operates" width="820">
-</picture></p>
-
-## How the models are held
-
-| What holds | How |
-|---|---|
-| One schema per call, decoded under constraint | the backend's grammar at generation, pydantic again on receipt |
-| Models read markdown, never files or raw JSON | code renders every input and inlines it |
-| Tools, files and shell only when a step declares them, only in its output folder | stated in the prompt, enforced by the runtime |
-| No agent grades its own work | the checker, a different vendor, on a frozen copy |
-| Every element carries a code-assigned id | coverage is a set difference, not a judgment |
-| Nothing is recorded from a refused answer | re-asked with the exact problems, at most six times |
-| Every loop is bounded and carries its trajectory | convergence computed; the unresolved carried into the report |
-| Tokens are the measure | dollars are a lookup, blank until the price is known |
 
 **Cost.** The page prices a run's tokens on read from a vendored copy of LiteLLM's model price map
 (420 models, the file and not the package). A model the map does not know shows `$?`. To override
@@ -188,126 +157,31 @@ a rate, put it in `prices.json` as US dollars per million tokens, input first, o
 The figure is the API price of the tokens; a side run on `claude -p` or `codex exec` under a
 subscription login is not billed per token, and the page marks such an estimate "at API rates".
 
-<details>
-<summary><b>A schema, as the model receives it</b> — the review round's answer</summary>
 
-Generated from the pydantic class by `wire_schema()`: every field required, no extra keys, ranges
-kept in validators rather than the grammar.
+## Workflow
 
-```json
-{
-  "$defs": {
-    "Finding": {
-      "additionalProperties": false,
-      "properties": {
-        "severity": {
-          "$ref": "#/$defs/Severity"
-        },
-        "cites": {
-          "description": "the ids this finding is about (they must exist)",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "description": "gap: the input itself is silent on this; routes to the human",
-          "enum": [
-            "finding",
-            "gap"
-          ],
-          "type": "string"
-        },
-        "klass": {
-          "$ref": "#/$defs/Klass"
-        },
-        "argument": {
-          "description": "why, engaging the cited text; a reader can check it",
-          "type": "string"
-        }
-      },
-      "required": [
-        "severity",
-        "cites",
-        "kind",
-        "klass",
-        "argument"
-      ],
-      "type": "object"
-    },
-    "Klass": {
-      "description": "The reconcile class (after addyosmani's agent-skills): what kind of thing a finding is.\nPrecedence when a finding could be two: contract_misread > actionable > tradeoff > noise.",
-      "enum": [
-        "contract_misread",
-        "actionable",
-        "tradeoff",
-        "noise"
-      ],
-      "type": "string"
-    },
-    "Severity": {
-      "enum": [
-        "blocking",
-        "major",
-        "minor"
-      ],
-      "type": "string"
-    }
-  },
-  "additionalProperties": false,
-  "description": "A review round's answer. Empty `findings` with APPROVED is allowed (rule 9: the empty\nset is a valid answer); zero findings after several rounds is weak evidence, and the\nreviewer prompt says so.",
-  "properties": {
-    "findings": {
-      "description": "empty means you found nothing",
-      "items": {
-        "$ref": "#/$defs/Finding"
-      },
-      "type": "array"
-    },
-    "verdict": {
-      "description": "REVISE iff at least one finding is filed",
-      "enum": [
-        "APPROVED",
-        "REVISE"
-      ],
-      "type": "string"
-    }
-  },
-  "required": [
-    "findings",
-    "verdict"
-  ],
-  "type": "object",
-  "title": "Findings"
-}
-```
+**Optimized for correctness.** The workflow is built so that a model can only do the one thing
+each step asks of it, and code decides everything else:
 
-</details>
+- A model reads markdown, everywhere. Code renders every input it sees and inlines it; a model
+  never opens a file or reads raw JSON.
+- A model fills a JSON schema, everywhere, under constrained decoding at generation and
+  pydantic again on receipt. There is no free text to parse.
+- A model has no read, write, tool, shell or network access unless the task needs it, and then
+  only inside its own output folder. It cannot wander; it can only answer.
+- A refused answer is never recorded. It is re-asked with the exact problems, bounded, and the
+  loop stops when the same problems come back.
+- No side grades its own work. The checker is a different vendor, on a frozen copy; every
+  element carries a code-assigned id, so coverage is a set difference, not a judgment.
+- Every loop is bounded and carries its trajectory; what does not converge is carried into the
+  report, never dropped. Tokens are the measure; dollars are a lookup.
 
-<details>
-<summary><b>An answer that passes</b></summary>
+What each stage does, who writes and who attacks, where code freezes, merges and runs, on the production-grade runtime above:
 
-```json
-{
-  "findings": [
-    {
-      "severity": "major",
-      "cites": [
-        "C-0007"
-      ],
-      "kind": "finding",
-      "klass": "actionable",
-      "argument": "C-0007 keeps alphanumeric content in order but says nothing about an input that is only separators; two implementers resolve it two ways."
-    }
-  ],
-  "verdict": "REVISE"
-}
-```
-
-Code then checks that every cited id exists in the text the reviewer was shown, assigns the finding
-its `F-` id, and only then writes the file.
-
-</details>
+<p align="center"><picture>
+<source media="(prefers-color-scheme: dark)" srcset="docs/media/workflow-dark.svg">
+<img src="docs/media/workflow.svg" alt="How the code-builder workflow operates" width="820">
+</picture></p>
 
 ## Origins
 
