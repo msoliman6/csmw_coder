@@ -142,7 +142,7 @@ run id
 |---|---|
 | One schema per call, decoded under constraint | the backend's grammar at generation, pydantic again on receipt |
 | Models read markdown, never files or raw JSON | code renders every input and inlines it |
-| Tools, files and shell only when a step declares them, only in its output folder | stated in the prompt, enforced by the harness |
+| Tools, files and shell only when a step declares them, only in its output folder | stated in the prompt, enforced by the runtime |
 | No agent grades its own work | the checker, a different vendor, on a frozen copy |
 | Every element carries a code-assigned id | coverage is a set difference, not a judgment |
 | Nothing is recorded from a refused answer | re-asked with the exact problems, at most six times |
