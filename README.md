@@ -3,7 +3,7 @@
 <img src="docs/media/banner.svg" alt="csmw coder" width="720">
 </picture></p>
 
-<p align="center"><b>The code-builder workflow: two model sides of different vendors build a Python module, with code deciding every step.</b><br>A production-grade agentic workflow: ten layers, each behind a seam with one production tool, proven live end to end.</p>
+<p align="center"><b>The code-builder workflow: two model sides of different vendors build a Python module, with code deciding every step.</b><br>A production-grade agentic workflow: ten layers, each behind a seam with one production tool, proven live end to end.<br>A Claude Code plugin with its own MCP server: one command starts a build that runs on the side, sends nothing back into your session, and is watched on its page.</p>
 
 <p align="center">
 <a href="LICENSE"><img alt="license: MIT" src="https://img.shields.io/badge/license-MIT-bb8009?style=flat-square"></a>
@@ -172,8 +172,10 @@ claude plugin install github:msoliman6/csmw_coder
 /csmw-coder:dashboard  the page's address, starting it if needed
 ```
 
-The run starts detached under the production runner and answers with one line: its name, the page's address, its folder.
-The page is where it is watched; the report lands in the folder. Claude Code writes, OpenAI
+The plugin declares an MCP server; `/csmw-coder:build` hands the task to it, and the run starts
+detached under the production runner. The answer back into your session is one line, its name,
+the page's address and its folder, and nothing else ever comes back: the run does its work on
+the side, the page is where it is watched, and the report lands in the folder. Claude Code writes, OpenAI
 Codex checks, both on your own logins, low effort, auto mode, one round; change the defaults in
 `plugin/defaults.json` or say what you want before `/csmw-coder:build`. The plugin's MCP server
 answers every verb (`workflow_run`, `workflow_status`, `workflow_cancel`, `workflow_pause`,
