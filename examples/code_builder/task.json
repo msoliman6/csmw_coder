@@ -7,9 +7,19 @@
       "request": "Build slug: a tiny library that turns any string into a URL slug: lowercase ascii words joined by single hyphens.",
       "context": "A standalone Python module, no dependencies.",
       "surface": "one function, slugify(text: str) -> str, in module slug",
-      "must_be_true": ["only a-z, 0-9 and '-' appear in a slug", "words keep their order", "None raises TypeError"],
-      "constraints": ["python 3.11", "no third-party packages"],
-      "out_of_scope": ["transliteration of non-ascii letters", "a CLI"],
+      "must_be_true": [
+        "only a-z, 0-9 and '-' appear in a slug",
+        "words keep their order",
+        "None raises TypeError"
+      ],
+      "constraints": [
+        "python 3.11",
+        "no third-party packages"
+      ],
+      "out_of_scope": [
+        "transliteration of non-ascii letters",
+        "a CLI"
+      ],
       "known_reference": "",
       "language": "python",
       "module": "slug"
@@ -17,10 +27,25 @@
     "fix_rounds": 1
   },
   "roles": {
-    "author": {"backend": "anthropic", "model": "claude-sonnet-5", "effort": "low"},
-    "checker": {"backend": "codex_cli", "model": "gpt-5.4-mini", "effort": "low"}
+    "author": {
+      "backend": "claude_cli",
+      "model": "claude-sonnet-5",
+      "effort": "low",
+      "thinking": false
+    },
+    "checker": {
+      "backend": "codex_cli",
+      "model": "gpt-5.4-mini",
+      "effort": "low",
+      "thinking": false
+    }
   },
-  "swaps": [["author", "checker"]],
-  "mode": "light",
+  "swaps": [
+    [
+      "author",
+      "checker"
+    ]
+  ],
+  "mode": "auto",
   "rounds": 1
 }
