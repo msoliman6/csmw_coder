@@ -3,7 +3,7 @@
 <img src="docs/media/banner.svg" alt="csmw coder" width="720">
 </picture></p>
 
-<p align="center"><b>csmw coder — <i>code steers, models write</i>. The code-builder workflow: two model sides of different vendors build a Python module, with code deciding every step.</b><br>A production-grade agentic workflow: ten layers, each behind a seam with one production tool, proven live end to end.<br>A Claude Code plugin with its own MCP server: one command starts a build that runs on the side, sends nothing back into your session, and is watched on its page.</p>
+<p align="center"><b>Code steers, models write, coder: two model sides of different vendors build a Python module, with code deciding every step.</b><br>A production-grade agentic workflow: ten layers, each behind a seam with one production tool, proven live end to end.<br>A Claude Code plugin with its own MCP server: one command starts a build that runs on the side, sends nothing back into your session, and is watched on its page.</p>
 
 
 <p align="center">
