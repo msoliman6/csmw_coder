@@ -20,8 +20,16 @@ LOG="$DATA/bootstrap.log"
     done
   fi
   if [ ! -x "$VENV/bin/python" ]; then
-    PY="$(command -v python3.11 || command -v python3)"
-    "$PY" -m venv "$VENV"
+    # the runtime needs Python 3.11 to 3.13 (Guardrails AI has no 3.14 build yet; the runtime's
+    # pyproject says so): the first interpreter in that range wins, and none is a named failure,
+    # not a pip error five screens long (ledger: a message that hides the reason)
+    PY=""
+    for cand in python3.13 python3.12 python3.11 python3; do
+      v="$(command -v "$cand" 2>/dev/null)" || continue
+      "$v" -c 'import sys; sys.exit(0 if (3, 11) <= sys.version_info[:2] <= (3, 13) else 1)' 2>/dev/null && { PY="$v"; break; }
+    done
+    [ -n "$PY" ] || { echo "need Python 3.11, 3.12 or 3.13 on PATH (found: $(python3 --version 2>&1 || echo none)); the runtime's dependencies do not build on 3.14 yet"; exit 2; }
+    "$PY" -m venv "$VENV" || { echo "could not create a venv with $PY"; exit 1; }
   fi
   "$VENV/bin/pip" install -q --upgrade pip || exit 1
   # the runtime first, from its checkout; then the workflow on top of it with no second resolution

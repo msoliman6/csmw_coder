@@ -29,7 +29,7 @@
 <a href="https://www.cedarpolicy.com/"><img alt="authorization: Cedar" src="https://img.shields.io/badge/authorization-Cedar-5a4fcf?style=flat-square"></a>
 <a href="https://www.guardrailsai.com/"><img alt="guardrails: Guardrails AI" src="https://img.shields.io/badge/guardrails-Guardrails%20AI-1f6feb?style=flat-square"></a>
 <a href="LICENSE"><img alt="license: MIT" src="https://img.shields.io/badge/license-MIT-bb8009?style=flat-square"></a>
-<a href="https://www.python.org/"><img alt="python: 3.11+" src="https://img.shields.io/badge/python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white"></a>
+<a href="https://www.python.org/"><img alt="python: 3.11 to 3.13" src="https://img.shields.io/badge/python-3.11%20to%203.13-3776AB?style=flat-square&logo=python&logoColor=white"></a>
 <a href="https://docs.anthropic.com/en/docs/claude-code"><img alt="Claude Code: author" src="https://img.shields.io/badge/Claude_Code-author-d97757?style=flat-square"></a>
 <a href="https://openai.com/codex/"><img alt="OpenAI Codex: adversarial checker" src="https://img.shields.io/badge/OpenAI_Codex-adversarial%20checker-10a37f?style=flat-square"></a>
 </p>
@@ -191,8 +191,9 @@ asked. Runs live under `~/.csmw/runs`.
 **The first build sets up the engine.** The plugin clones
 [Code steers, models write](https://github.com/msoliman6/code_steer_model_write) into its own
 data folder with `gh`, makes a virtual environment there and installs the runtime and this
-workflow into it. A few minutes, once; nothing touches your projects. A checkout of your own can
-be pointed at instead through the plugin's `harness_path` setting.
+workflow into it. A few minutes, once; nothing touches your projects. It needs `gh` signed in
+and a Python 3.11, 3.12 or 3.13 on PATH (the guardrails layer has no 3.14 build yet). A checkout
+of your own can be pointed at instead through the plugin's `harness_path` setting.
 
 **On a remote machine.** The page binds to the machine it runs on. From your own browser,
 open a tunnel and use the same address: `ssh -L 3007:127.0.0.1:3007 user@host`. To put the
