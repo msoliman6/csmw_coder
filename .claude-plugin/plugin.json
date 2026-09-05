@@ -19,8 +19,8 @@
   "userConfig": {
     "harness_path": {
       "type": "string",
-      "title": "Harness checkout",
-      "description": "Path to the harness package checkout the workflow runs on (default: cloned into the plugin's data dir with gh)"
+      "title": "Runtime checkout",
+      "description": "Path to the runtime package checkout the workflow runs on (default: cloned into the plugin's data dir with gh)"
     },
     "runs_dir": {
       "type": "string",
