@@ -24,7 +24,10 @@ LOG="$DATA/bootstrap.log"
     "$PY" -m venv "$VENV"
   fi
   "$VENV/bin/pip" install -q --upgrade pip || exit 1
-  "$VENV/bin/pip" install -q -e "$HARNESS" -e "$PLUGIN_ROOT" || { echo "pip could not install the runtime and the workflow"; exit 1; }
+  # the runtime first, from its checkout; then the workflow on top of it with no second resolution
+  # of the runtime (its name is not on PyPI, so pip would look for it there and refuse)
+  "$VENV/bin/pip" install -q -e "$HARNESS" || { echo "pip could not install the runtime from $HARNESS"; exit 1; }
+  "$VENV/bin/pip" install -q --no-deps -e "$PLUGIN_ROOT" || { echo "pip could not install the workflow"; exit 1; }
   [ -x "$VENV/bin/csmw" ] || { echo "the install left no csmw in $VENV"; exit 1; }
   echo "$HARNESS" > "$DATA/harness.path"
 } >> "$LOG" 2>&1 || { echo "bootstrap failed; see $LOG"; exit 1; }
