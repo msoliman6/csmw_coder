@@ -4,10 +4,8 @@
 source "$(dirname "${BASH_SOURCE[0]}")/env.sh"
 LOG="$DATA/bootstrap.log"
 {
-  if [ -z "$HARNESS" ]; then
-    for cand in "$DATA/harness" "$HOME/Documents/Agents_design/code_steer_model_write"; do
-      [ -f "$cand/pyproject.toml" ] && HARNESS="$cand" && break
-    done
+  if [ -z "$HARNESS" ] && [ -f "$DATA/harness/pyproject.toml" ]; then
+    HARNESS="$DATA/harness"  # cloned on an earlier run
   fi
   if [ -z "$HARNESS" ] || [ ! -f "$HARNESS/pyproject.toml" ]; then
     command -v gh >/dev/null || { echo "need gh to fetch the runtime, or set harness_path"; exit 2; }
