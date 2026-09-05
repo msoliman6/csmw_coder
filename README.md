@@ -3,7 +3,7 @@
 <img src="docs/media/banner.svg" alt="csmw coder" width="720">
 </picture></p>
 
-<p align="center"><b>The code-builder workflow: two model sides of different vendors build a Python module, with code deciding every step.</b></p>
+<p align="center"><b>The code-builder workflow: two model sides of different vendors build a Python module, with code deciding every step.</b><br>A production-grade agentic workflow: ten layers, each behind a seam with one production tool, proven live end to end.</p>
 
 <p align="center">
 <a href="LICENSE"><img alt="license: MIT" src="https://img.shields.io/badge/license-MIT-bb8009?style=flat-square"></a>
@@ -23,22 +23,14 @@
 
 <p align="center"><i>Independent open-source project. Not affiliated with or endorsed by Anthropic or OpenAI.<br>Claude and Claude Code are trademarks of Anthropic; Codex and GPT are trademarks of OpenAI. Prefect, MLflow, Reflex, ruff, pyright and pytest belong to their owners.</i></p>
 
-## See it run
-
-One run, from the start page to the report, on claude-haiku-4-5 and gpt-5.4-mini in auto mode.
-
-<p align="center"><img src="docs/media/run.gif" alt="A run from the start page to the report" width="900"></p>
-
-<p align="center">
-<img src="docs/media/start-page.png" alt="The start page" width="440">
-<img src="docs/media/run-page.png" alt="The run page, mid-run" width="440">
-</p>
-
 ## Execution layers and governance planes
 
-The workflow above runs on a runtime of seven execution layers and three cross-cutting planes,
-each behind a seam with one production tool chosen for it. Every choice is free, self-hosted and
-a Python SDK; the offline walk proves every layer with fake models before any live run.
+The workflow runs on a runtime of seven execution layers and three cross-cutting planes, each
+behind a seam with one production tool chosen for it. Every choice is free, self-hosted and a
+Python SDK; the offline walk proves every layer with fake models before any live run. The ten
+came out of reading what Anthropic, OpenAI, Google, Microsoft, AWS, Palantir and IBM publish
+about their agent platforms, and the papers and standards behind them; the second table below
+says what each layer rests on, with the sources.
 
 <img alt="interface & control" src="https://img.shields.io/badge/-interface%20%26%20control-5646ED?style=flat-square"> <img alt="orchestration & runtime" src="https://img.shields.io/badge/-orchestration%20%26%20runtime-d04a45?style=flat-square"> <img alt="execution & tools" src="https://img.shields.io/badge/-execution%20%26%20tools-2496ED?style=flat-square"> <img alt="state" src="https://img.shields.io/badge/-state-1f6feb?style=flat-square"> <img alt="cross-cutting planes" src="https://img.shields.io/badge/-cross--cutting%20planes-bb8009?style=flat-square">
 
@@ -133,6 +125,17 @@ run id
    +-- the registry -> which runs exist, where, in what state?
    +-- the run folder -> the record: state, events, artifacts, evals
 ```
+
+## See it run
+
+One run, from the start page to the report, on claude-haiku-4-5 and gpt-5.4-mini in auto mode.
+
+<p align="center"><img src="docs/media/run.gif" alt="A run from the start page to the report" width="900"></p>
+
+<p align="center">
+<img src="docs/media/start-page.png" alt="The start page" width="440">
+<img src="docs/media/run-page.png" alt="The run page, mid-run" width="440">
+</p>
 
 ## Quick start
 
