@@ -21,7 +21,7 @@
 <a href="csmw_coder/workflow.py"><img alt="workflow: workflow.py" src="https://img.shields.io/badge/workflow-workflow.py-30363d?style=flat-square"></a>
 </p>
 
-<p align="center"><i>Independent open-source project. Not affiliated with or endorsed by Anthropic or OpenAI.<br>Claude and Claude Code are trademarks of Anthropic; Codex and GPT are trademarks of OpenAI. Prefect, MLflow, Reflex, ruff, pyright and pytest belong to their owners.</i></p>
+<p align="center"><i>Independent open-source project. Not affiliated with or endorsed by Anthropic or OpenAI.<br>Claude and Claude Code are trademarks of Anthropic; Codex and GPT are trademarks of OpenAI. Prefect, MLflow, Reflex, PydanticAI, pydantic, Guardrails AI, Cedar, Docker, Colima, obstore, Typer, Jinja2, SQLite, OpenTelemetry, the Model Context Protocol, ruff, pyright and pytest belong to their owners.</i></p>
 
 ## A production-grade agentic workflow
 
@@ -32,6 +32,12 @@ behind a seam with one production-grade package chosen for it: free, self-hosted
 the same tool the platforms ship. The ten came out of reading what Anthropic, OpenAI, Google,
 Microsoft, AWS, Palantir and IBM publish about their agent platforms, and the papers and
 standards behind them; the second table says what each layer rests on, with the sources.
+
+<p align="center"><picture>
+<source media="(prefers-color-scheme: dark)" srcset="docs/media/layers-dark.svg">
+<img src="docs/media/layers.svg" alt="The ten layers: the request path, the execution pair, the three planes, the record" width="900">
+</picture></p>
+
 
 <img alt="interface & control" src="https://img.shields.io/badge/-interface%20%26%20control-5646ED?style=flat-square"> <img alt="orchestration & runtime" src="https://img.shields.io/badge/-orchestration%20%26%20runtime-d04a45?style=flat-square"> <img alt="execution & tools" src="https://img.shields.io/badge/-execution%20%26%20tools-2496ED?style=flat-square"> <img alt="state" src="https://img.shields.io/badge/-state-1f6feb?style=flat-square"> <img alt="cross-cutting planes" src="https://img.shields.io/badge/-cross--cutting%20planes-bb8009?style=flat-square">
 
