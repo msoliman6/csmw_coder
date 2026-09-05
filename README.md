@@ -29,7 +29,7 @@
 <a href="https://github.com/openai/codex"><img alt="OpenAI Codex CLI" src="https://img.shields.io/badge/OpenAI_Codex_CLI-backend-10a37f?style=flat-square"></a>
 </p>
 
-<p align="center"><a href="#see-it-run">See it run</a> · <a href="#quick-start">Quick start</a> · <a href="#workflow">Workflow</a> · <a href="#harness">Harness</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#license">License</a></p>
+<p align="center"><a href="#see-it-run">See it run</a> · <a href="#quick-start">Quick start</a> · <a href="#workflow">Workflow</a> · <a href="#the-ten-layers">The ten layers</a> · <a href="#how-the-models-are-held">How the models are held</a> · <a href="#license">License</a></p>
 
 <p align="center">
 <a href="examples/code_builder/task.json"><img alt="example: task.json" src="https://img.shields.io/badge/example-task.json-30363d?style=flat-square"></a>
@@ -63,11 +63,14 @@ claude plugin install github:msoliman6/csmw_coder      # or: claude plugin insta
 /csmw-coder:dashboard  the page's address, starting it if needed
 ```
 
-`/csmw-coder:build` writes the task from the conversation, starts the run as its own process and
-answers with one line: the run's name, the page's address, the run's folder. Nothing else comes
+`/csmw-coder:build` writes the task from the conversation and hands it to the plugin's MCP
+server (`workflow_run`), which validates it, registers the run and starts it detached; the
+answer is one line: the run's name, the page's address, the run's folder. Nothing else comes
 back into the session; the page is where the run is watched, and the report lands in the run's
-folder. Runs live under `~/.csmw/runs`, outside any project. The first build sets up the
-plugin's environment, which takes a few minutes once.
+folder. The same server answers `workflow_status`, `workflow_cancel`, `workflow_pause`,
+`workflow_resume`, `workflow_run_again`, `run_list`, `run_get`, `run_logs`, `run_artifacts`
+and `run_forget` to any MCP host. Runs live under `~/.csmw/runs`, outside any project. The
+first build sets up the plugin's environment, which takes a few minutes once.
 
 The models: Claude Code as the author and OpenAI Codex as the adversarial checker, both through
 their CLIs on your logins, low effort, auto mode, one round. Change the defaults in
@@ -77,7 +80,7 @@ their CLIs on your logins, low effort, auto mode, one round. Change the defaults
 <summary><b>Without the plugin</b> — the same run from a shell</summary>
 
 ```bash
-just install          # a venv with the harness and this package
+just install          # a venv with the runtime and this package
 just doctor           # the backends, the CLIs, the keys
 just run              # the example task live
 just dash             # the page at http://127.0.0.1:3007
@@ -87,8 +90,8 @@ The example task (`examples/code_builder/task.json`) builds a slug library.
 
 </details>
 
-**Cost.** The page prices a run's tokens on read from LiteLLM's model price map, which covers every
-provider and refreshes from the LiteLLM repo. A model the map does not know shows `$?`. To override
+**Cost.** The page prices a run's tokens on read from a vendored copy of LiteLLM's model price map
+(420 models, the file and not the package). A model the map does not know shows `$?`. To override
 a rate, put it in `prices.json` as US dollars per million tokens, input first, output second:
 `{"my-negotiated-model": [0.25, 2.0]}`. Cached input is billed at the map's cached rate.
 The figure is the API price of the tokens; a side run on `claude -p` or `codex exec` under a
@@ -103,43 +106,35 @@ What each stage does, who writes and who attacks, where code freezes, merges and
 <img src="docs/media/workflow.svg" alt="How the code-builder workflow operates" width="820">
 </picture></p>
 
-## Harness
+## The ten layers
 
-The harness operates on top of the workflow: the workflow figure above is the top box of this
-one. The agent workflow is Python; it feeds Prefect and MLflow through their SDKs; both feed
-`monitor.db`; Reflex is the human control plane; the custom dashboard is what you look at.
+The workflow above runs on a runtime of ten layers, seven of execution and three cross-cutting
+planes, each behind a seam with one tool chosen for it. Every choice is free, self-hosted and a
+Python SDK; the offline walk proves every layer with fake models before any live run.
 
-<p align="center"><picture>
-<source media="(prefers-color-scheme: dark)" srcset="docs/media/harness-dark.svg">
-<img src="docs/media/harness.svg" alt="How the runtime is wired" width="760">
-</picture></p>
+| layer | what it owns | behind the seam |
+|---|---|---|
+| L1 UI | a home of every run, the run page, the start page | Reflex, Jinja2 |
+| L2 control plane | the task, the budgets, the run registry, the MCP server this plugin declares | pydantic, the MCP SDK, Typer, SQLite |
+| L3 orchestration | the sequence: the driver derives the next step from disk; the runner detaches, cancels, pauses, resumes, runs the tests and the source side by side | the driver, Prefect 3 as the runner |
+| L4 agent runtime | one model call under a schema | Claude Code and Codex on their logins; PydanticAI where keys exist |
+| L5 sandbox | where every check runs, bounded: network off, the run folder the only mount | a container per check on the Docker SDK over Colima; a subprocess tier for the walk |
+| L6 tools | the typed registry of git, pytest, ruff and pyright, every call an event | the runtime's `ToolSpec` registry |
+| L7 state | the record: files per run, versioned artifacts, the index across runs | files, SQLite, obstore |
+| L8 observability | traces, tokens, the five evaluations, trends across runs | MLflow 3 on SQLite, OpenTelemetry names |
+| L9 authorization | may this side author, judge, write or call this | Cedar, one policy file |
+| L10 guardrails | before the prompt, after the answer, before a tool call | the schema and the checks, Guardrails AI validators |
 
-<details>
-<summary><b>Clean responsibility split</b></summary>
-
-| system | owns |
-|---|---|
-| **Prefect** | workflow execution · task dependencies · retries · scheduling · cancellation · run/task state |
-| **MLflow** | agent / LLM traces · spans · tool calls · retrieval traces · token / cost / latency · workflow / agent evaluation · scientific / ML experiments · parameters / metrics · artifacts / models |
-| **monitor.db** | dashboard-only state · live human-readable progress · current activity · UI metadata · graph layout / positions |
-| **Reflex** | human control plane · create tasks · launch / cancel runs · live dashboard · inspect traces · inspect experiments · inspect evaluations |
-
-</details>
-
-<details>
-<summary><b>Shared workflow id</b></summary>
-
-Every subsystem receives the same application-level id, and the dashboard joins on it:
+Every subsystem receives the same run id, and the page joins on it:
 
 ```text
-workflow_run_id = "run_123"
+run id
    |
-   +-- Prefect -----> What is executing?
-   +-- MLflow ------> What did the agents do? How did the experiment perform?
-   +-- monitor.db --> What UI-specific state should be displayed?
+   +-- Prefect ------> what is executing?
+   +-- MLflow -------> what did the models do, at what cost, how well?
+   +-- the registry -> which runs exist, where, in what state?
+   +-- the run folder -> the record: state, events, artifacts, evals
 ```
-
-</details>
 
 ## How the models are held
 
